@@ -1,0 +1,12 @@
+{
+    "name": "user/final",
+    "description": "Final PHP project",
+    "autoload": {
+        "psr-4": {
+            "app\\": "./"
+        }
+    },
+    "require": {
+        "vlucas/phpdotenv": "^5.3"
+    }
+}
