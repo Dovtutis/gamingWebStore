@@ -1,0 +1,221 @@
+#navbar-container {
+    position: fixed;
+    width: 100%;
+    height: $navbar-height;
+    left: 0;
+    right: 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+    color: $text-color-dark-blue;
+    background-color: $background-color-gray;
+    font-weight: 500;
+    z-index: 2;
+
+    #search-box {
+      white-space: nowrap;
+      margin: 0 10px;
+
+      #search-input {
+        height: 40px;
+        border: none;
+        line-height: 40px;
+        font-size: 18px;
+        padding: 0 10px;
+      }
+
+      #search-button {
+        margin: 0 10px;
+        font-size: 24px;
+        color: $text-color-dark-blue;
+        text-decoration: none;
+        transition: .3s;
+      }
+
+      #search-button:hover {
+        color: $text-color-dark-blue-light;
+        transform: scale(.98);
+      }
+
+    }
+
+    #navbar-inner-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 48px;
+      margin: 0 auto;
+      height: 100%;
+  
+      .home-link {
+        text-decoration: none;
+        color: $text-color-dark-blue;
+      }
+  
+      .navbar-menu {
+  
+        .navbar-links {
+          display: flex;
+          align-items: center;
+          list-style-type: none;
+          transition: color .3s ease-in-out;
+          font-family: $font-2;
+          margin: 0;
+  
+          .navbar-link {
+            text-decoration: none;
+            color: $text-color-dark-blue;
+            transition: .3s;
+            margin: 0 10px;
+          }
+  
+          .navbar-link:hover {
+            color: $text-color-dark-blue-light;
+          }
+  
+          .navbar-item:hover {
+            transform: scale(.98);
+          }
+        }
+      }
+  
+      .nav-logo {
+        font-size: 22px;
+        font-weight: bold;
+      }
+  
+    }
+  }
+
+@media only screen and (min-width: 1367px) {
+
+  #search-box {
+    #search-input {
+      width: 500px;
+    }
+  }
+
+  .navbar-toggle {
+    display: none;
+  }
+  .navbar-link {
+    color: $text-color-dark-blue;
+  }
+}
+
+@media only screen and (min-width: 960px) and (max-width: 1367px) {
+
+  #search-box {
+    #search-input {
+      width: 400px;
+    }
+  }
+
+  .navbar-toggle {
+    display: none;
+  }
+    
+  .navbar-link {
+    color: $text-color-dark-blue;
+  }
+}
+
+@media only screen and (min-width: 640px) and (max-width: 960px) {
+
+  #search-box {
+    #search-input {
+      width: 300px;
+    }
+  }
+
+  .navbar-toggle {
+    display: none;
+  }
+    
+  .navbar-link {
+    color: $text-color-dark-blue;
+  }
+}
+
+@media only screen and (max-width: 640px) {
+
+  #search-box {
+    #search-input {
+      width: 250px;
+    }
+  }
+
+  #navbar-inner-container {
+    .navbar-toggle {
+      cursor: pointer;
+      border: none;
+      background-color: transparent;
+      width: 40px;
+      height: 40px;
+      outline: none;
+  
+      i {
+        font-size: 24px;
+        transition: .3s;
+        color: $text-color-dark-blue;
+      }
+  
+      i:hover {
+        transform: scale(.96);
+        color: $text-color-dark-blue-light;
+      }
+    }
+  
+    .navbar-menu {
+      position: fixed;
+      top: $navbar-height;
+      bottom: 0;
+      transition: .2s;
+      opacity: 0;
+      visibility: hidden;
+      left: 0;
+      right: 0;
+    }
+}
+  
+  #navbar-container.opened .navbar-menu {
+    background-color: rgba(0, 0, 0, 0.2);
+    opacity: 1;
+    visibility: visible;
+  }
+  
+  .navbar-links {
+    background-color: $background-color-gray-rgba;
+    list-style-type: none;
+    max-height: 0;
+    overflow: hidden;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    left: 0;
+    right: 0;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  
+    .navbar-item{
+      margin: 16px;
+      width: 100%;
+      border-radius: 5px;
+      text-align: center;
+      font-weight: 600;
+      border-bottom: 3px solid #d3d3d3;
+  
+      .navbar-item:hover{
+        cursor: pointer;
+      }
+  
+      .navbar-link {
+        color: #d3d3d3;
+        font-size: 1.5rem;
+      }
+    }
+  }
+  
+  #navbar-container .navbar-links {
+    padding: 1em;
+    max-height: none;
+  }
+}

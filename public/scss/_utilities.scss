@@ -1,0 +1,89 @@
+.container {
+  margin-left: auto;
+  margin-right: auto;
+  padding: 10px;
+  max-width: 1367px;
+}
+
+.z-index-1 {
+  z-index: 1;
+}
+
+.z-index-2 {
+  z-index: 2;
+}
+
+.z-index-3 {
+  z-index: 3;
+}
+
+.z-index-4 {
+  z-index: 4;
+}
+
+//Margin & Padding classes
+
+$spaceAmounts: (1, 2, 3, 4, 5);
+
+@each $space in $spaceAmounts{
+  .m-#{$space}{
+    margin: #{$space}rem;
+  }
+
+  .mx-#{$space}{
+    margin-left: #{$space}rem;
+    margin-right: #{$space}rem;
+  }
+
+  .my-#{$space}{
+    margin-top: #{$space}rem;
+    margin-bottom: #{$space}rem;
+  }
+
+  .mt-#{$space}{
+    margin-top: #{$space}rem;
+  }
+
+  .mb-#{$space}{
+    margin-bottom: #{$space}rem;
+  }
+
+  .ml-#{$space}{
+    margin-left: #{$space}rem;
+  }
+
+  .mr-#{$space}{
+    margin-right: #{$space}rem;
+  }
+
+  .p-#{$space}{
+    padding: #{$space}rem;
+  }
+
+  .px-#{$space}{
+    padding-left: #{$space}rem;
+    padding-right: #{$space}rem;
+  }
+
+  .py-#{$space}{
+    padding-top: #{$space}rem;
+    padding-bottom: #{$space}rem;
+  }
+
+  .pt-#{$space}{
+    padding-top: #{$space}rem;
+  }
+
+  .pb-#{$space}{
+    padding-bottom: #{$space}rem;
+  }
+
+  .pl-#{$space}{
+    padding-left: #{$space}rem;
+  }
+
+  .pr-#{$space}{
+    padding-right: #{$space}rem;
+  }
+}
+

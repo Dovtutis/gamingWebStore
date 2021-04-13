@@ -1,0 +1,38 @@
+@import "config";
+@import "utilities";
+@import "./components/navbar";
+
+@font-face {
+  font-family: 'MyWebFont';
+  src: url('webfont.eot'); /* IE9 Compat Modes */
+  src: url('webfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('webfont.woff2') format('woff2'), /* Super Modern Browsers */
+       url('webfont.woff') format('woff'), /* Pretty Modern Browsers */
+       url('webfont.ttf')  format('truetype'), /* Safari, Android, iOS */
+       url('webfont.svg#svgFontName') format('svg'); /* Legacy iOS */
+}
+
+* {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  font-family: $font-1;
+  margin: 0;
+  padding: 0;
+}
+
+.main {
+  padding-top: $navbar-height;
+}
+
+.display-flex {
+  display: flex;
+}
+
+.display-none {
+  display: none;
+}
+
+// @import "large-screen";
+// @import "medium-screen";
+// @import "small-screen";
+// @import "extra-small-screen";
