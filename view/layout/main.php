@@ -21,7 +21,7 @@
         <nav>
             <div id="navbar-container">
                 <div class="container" id="navbar-inner-container">
-                    <a href="#" class="home-link">
+                    <a href="/" class="home-link">
                         <div class="nav-logo">GAMING WORLD</div>
                     </a>
                     <div id="search-box">
@@ -37,9 +37,9 @@
                                 <li class="navbar-item px-1"><a class="navbar-link" href="/register">Register</a></li>
                                 <li class="navbar-item px-1"><a class="navbar-link" href="/login">Login</a></li>
                             <?php else : ?>
-                                <li class="navbar-item px-1"><a class="navbar-link" href="#navbar-tag-news">My Account</a></li>
+                                <li class="navbar-item px-1"><a class="navbar-link" href="/userAccount">My Account</a></li>
                                 <li class="navbar-item px-1"><a class="navbar-link" href="#navbar-tag-contact">Shopping Cart</a></li>
-                                <li class="navbar-item px-1"><a class="navbar-link" href="#navbar-tag-contact">Logout</a></li>
+                                <li class="navbar-item px-1"><a class="navbar-link" href="/logout">Logout</a></li>
                             <?php endif; ?>
                         </ul>
                     </div>

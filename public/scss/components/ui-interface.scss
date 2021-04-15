@@ -1,0 +1,92 @@
+.ui-interface-page {
+    width: 100%;
+    background-color: $background-color-gray;
+
+    .ui-interface-container {
+        width: 90%;
+        margin: 0 auto;
+        padding-top: 50px;
+        height: 800px;
+        min-width: 280px;
+        display: flex;
+
+        .ui-interface-controls-container {
+            flex: 2;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+
+            .ui-interface-button {
+                width: 100%;
+                height: 80px;
+                text-align: center;
+                font-size: 18px;
+                cursor: pointer;
+                transition: .3s;
+                outline: none;
+                border: 1px solid rgb(221, 221, 221);
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+            }
+
+            .ui-interface-button:hover {
+                background-color: $background-color-gray-strong;
+            }
+        }
+
+        .ui-interface-info-container {
+            flex: 10;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+            height: 100%;
+
+            #orders-container {
+                padding: 10px;
+
+                .order-row {
+                    width: 100%;
+                    display: flex;
+                    padding: 16px 0;
+                    overflow-x: auto;
+
+                    .order-row-id {
+                        padding-left: 20px;
+                        margin: 0;
+                    }
+
+                    div {
+                        margin: 0 5px;
+                        min-width: 80px;
+                        font-size: 16px;
+                    }
+
+                    .order-row-list {
+                        min-width: 370px;
+                        padding: 0 20px;
+                        margin: 0;
+
+                        .order-link {
+                            text-decoration: none;
+                        }
+                    }
+                    
+                    .order-row-message {
+                        width: 250px;
+                        max-height: 100px;
+                        padding: 0 20px;
+                        margin: 0;
+                        overflow-y: auto;
+                    }
+                    
+                    .status-date-box {
+                        max-width: 250px;
+                        display: flex;
+                        flex-direction: column; 
+                    }
+                    
+                    .status-date-box div {
+                        display: flex;
+                        flex-direction: column; 
+                        padding-left: 20px;
+                    }
+                }
+            }
+        }
+    }
+}

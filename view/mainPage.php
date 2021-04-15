@@ -22,10 +22,6 @@
     </div>
     </article>
 </main>
-<footer>
-    <div id="index-footer-container">
-        © 2021. Dovydas Tutinas, all rights reserved.
-    </div>
-</footer>
-<?php var_dump($name) ?>
+
+
 
