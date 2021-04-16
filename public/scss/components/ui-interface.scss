@@ -87,6 +87,47 @@
                     }
                 }
             }
+
+            #account-information-container {
+                display: none;
+                margin: 0 auto;
+                padding: 30px 0;
+                width: 600px;
+
+                #account-information-headline {
+                    font-size: 18px;
+                    font-weight: 600;
+                }
+
+                #edit-button {
+                    width: 150px;
+                }
+            }
+        }
+
+        #password-change-container {
+            display: none;
+            margin: 0 auto;
+            padding: 50px 0;
+            width: 600px;
+
+            #passowrd-change-response-element {
+                margin-top: 20px;
+                font-size: 18px;
+                font-weight: 600;
+                color: #24ba07;
+                text-align: center;
+            }
+
+            #submit-new-password-button {
+                width: 150px;
+                margin-top: 20px;
+            }
+
+            #password-change-headline {
+                font-size: 18px;
+                font-weight: 600;
+            }
         }
     }
 }
