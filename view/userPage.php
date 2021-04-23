@@ -143,7 +143,6 @@ use \app\core\html\FormField;
     }
 
     function showChangePassword() {
-        console.log("show pasword");
         ordersEl.style.display = "none";
         accountInformationEl.style.display = "none";
         passwordChangeEl.style.display = "block";

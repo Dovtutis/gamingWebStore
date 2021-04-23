@@ -159,7 +159,7 @@ class Validation
     }
 
     /**
-     * Validates comentar length.
+     * Validates comment length.
      *
      * @param $field
      * @return string
@@ -169,5 +169,23 @@ class Validation
         if (empty($field)) return "Comment Cannot Be Empty";
         if (strlen($field)>500) return "Max Characters Count 500!";
         return '';
+    }
+
+    public function validateURL($url)
+    {
+        if (filter_var($url, FILTER_VALIDATE_URL)) {
+            return '';
+        } else {
+            return ("It is not a valid URL, please enter a correct URL");
+        }
+    }
+
+    public function validateItemType($type)
+    {
+        if($type === null) {
+            return 'Select item type, input field can not bet unselected';
+        } else {
+            return '';
+        }
     }
 }

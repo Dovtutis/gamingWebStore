@@ -1,6 +1,4 @@
-<?php
-use \app\core\html\FormField;
-?>
+<?php use \app\core\html\FormField;?>
 
     <div class="row">
         <div class="col-lg-6 mx-auto">

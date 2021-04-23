@@ -37,8 +37,12 @@
                                 <li class="navbar-item px-1"><a class="navbar-link" href="/register">Register</a></li>
                                 <li class="navbar-item px-1"><a class="navbar-link" href="/login">Login</a></li>
                             <?php else : ?>
-                                <li class="navbar-item px-1"><a class="navbar-link" href="/userAccount">My Account</a></li>
-                                <li class="navbar-item px-1"><a class="navbar-link" href="#navbar-tag-contact">Shopping Cart</a></li>
+                                <?php if($_SESSION['status'] === 'customer') :?>
+                                    <li class="navbar-item px-1"><a class="navbar-link" href="/userAccount">My Account</a></li>
+                                    <li class="navbar-item px-1"><a class="navbar-link" href="#navbar-tag-contact">Shopping Cart</a></li>
+                                <?php else : ?>
+                                    <li class="navbar-item px-1"><a class="navbar-link" href="/adminPanel">Admin Panel</a></li>
+                                <?php endif; ?>   
                                 <li class="navbar-item px-1"><a class="navbar-link" href="/logout">Logout</a></li>
                             <?php endif; ?>
                         </ul>

@@ -43,12 +43,13 @@ use \app\core\html\FormField;
             body: formData
         }).then(resp => resp.json())
             .then(data => {
+                console.log(data);
                 if (data === "loginSuccessful"){
                     window.location.replace("/");
                 }
                 if (data.errors){
                     handleErrors(data.errors);
-                } '',
+                }
             }).catch(error => console.error())
     }
 

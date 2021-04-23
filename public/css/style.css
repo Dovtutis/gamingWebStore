@@ -471,7 +471,7 @@
   }
 
   .navbar-links {
-    background-color: rgba(245, 245, 245, 0.8);
+    background-color: rgba(245, 245, 245, 0.9);
     list-style-type: none;
     max-height: 0;
     overflow: hidden;
@@ -504,6 +504,225 @@
     max-height: none;
   }
 }
+.ui-interface-page {
+  width: 100%;
+  min-height: 100vh;
+  background-color: #F5F5F5;
+}
+.ui-interface-page .ui-interface-container {
+  width: 90%;
+  height: 100%;
+  margin: 0 auto;
+  padding-top: 50px;
+  min-width: 280px;
+  display: flex;
+}
+.ui-interface-page .ui-interface-container .ui-interface-controls-container {
+  flex: 2;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+.ui-interface-page .ui-interface-container .ui-interface-controls-container .ui-interface-button {
+  width: 100%;
+  height: 80px;
+  text-align: center;
+  font-size: 18px;
+  cursor: pointer;
+  transition: 0.3s;
+  outline: none;
+  border: 1px solid #dddddd;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+.ui-interface-page .ui-interface-container .ui-interface-controls-container .ui-interface-button:hover {
+  background-color: #d4d3d3;
+}
+.ui-interface-page .ui-interface-container .ui-interface-info-container {
+  flex: 10;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  height: 100%;
+}
+.ui-interface-page .ui-interface-container .ui-interface-info-container #orders-container {
+  padding: 10px;
+}
+.ui-interface-page .ui-interface-container .ui-interface-info-container #orders-container .order-row {
+  width: 100%;
+  display: flex;
+  padding: 16px 0;
+  overflow-x: auto;
+}
+.ui-interface-page .ui-interface-container .ui-interface-info-container #orders-container .order-row .order-row-id {
+  padding-left: 20px;
+  margin: 0;
+}
+.ui-interface-page .ui-interface-container .ui-interface-info-container #orders-container .order-row div {
+  margin: 0 5px;
+  min-width: 80px;
+  font-size: 16px;
+}
+.ui-interface-page .ui-interface-container .ui-interface-info-container #orders-container .order-row .order-row-list {
+  min-width: 370px;
+  padding: 0 20px;
+  margin: 0;
+}
+.ui-interface-page .ui-interface-container .ui-interface-info-container #orders-container .order-row .order-row-list .order-link {
+  text-decoration: none;
+}
+.ui-interface-page .ui-interface-container .ui-interface-info-container #orders-container .order-row .order-row-message {
+  width: 250px;
+  max-height: 100px;
+  padding: 0 20px;
+  margin: 0;
+  overflow-y: auto;
+}
+.ui-interface-page .ui-interface-container .ui-interface-info-container #orders-container .order-row .status-date-box {
+  max-width: 250px;
+  display: flex;
+  flex-direction: column;
+}
+.ui-interface-page .ui-interface-container .ui-interface-info-container #orders-container .order-row .status-date-box div {
+  display: flex;
+  flex-direction: column;
+  padding-left: 20px;
+}
+.ui-interface-page .ui-interface-container .ui-interface-info-container #account-information-container {
+  display: none;
+  margin: 0 auto;
+  padding: 30px 0;
+  width: 600px;
+}
+.ui-interface-page .ui-interface-container .ui-interface-info-container #account-information-container #account-information-headline {
+  font-size: 18px;
+  font-weight: 600;
+}
+.ui-interface-page .ui-interface-container .ui-interface-info-container #account-information-container #edit-button {
+  width: 150px;
+}
+.ui-interface-page .ui-interface-container #password-change-container {
+  display: none;
+  margin: 0 auto;
+  padding: 50px 0;
+  width: 600px;
+}
+.ui-interface-page .ui-interface-container #password-change-container #passowrd-change-response-element {
+  margin-top: 20px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #24ba07;
+  text-align: center;
+}
+.ui-interface-page .ui-interface-container #password-change-container #submit-new-password-button {
+  width: 150px;
+  margin-top: 20px;
+}
+.ui-interface-page .ui-interface-container #password-change-container #password-change-headline {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.admin-interface-info-container {
+  flex: 10;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  height: 100%;
+  width: 100%;
+  overflow-x: scroll;
+}
+.admin-interface-info-container .response-message-element {
+  width: 100%;
+  margin: 10px auto;
+  display: block;
+  font-size: 22px;
+  color: yellowgreen;
+  text-align: center;
+  font-weight: 600;
+}
+.admin-interface-info-container .add-new-item-container {
+  margin: 0 auto;
+  padding: 30px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.admin-interface-info-container .add-new-item-container #add-new-item-form label {
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+.admin-interface-info-container .add-new-item-container #add-new-item-form textarea {
+  box-sizing: border-box;
+  width: 100%;
+}
+.admin-interface-info-container .add-new-item-container .admin-panel-headline {
+  font-size: 18px;
+}
+.admin-interface-info-container .add-new-item-container #add-new-item-form {
+  margin-top: 20px;
+}
+.admin-interface-info-container .add-new-item-container #add-item-button {
+  width: 150px;
+}
+.admin-interface-info-container .order-management-container {
+  display: none;
+  margin: 0 auto;
+  padding: 30px;
+  min-height: 800px;
+  flex-direction: column;
+}
+.admin-interface-info-container .order-management-container .order-row {
+  display: flex;
+  padding: 16px 0;
+  min-width: 1200px;
+}
+.admin-interface-info-container .order-management-container .order-row .order-row-id {
+  padding-left: 20px;
+}
+.admin-interface-info-container .order-management-container .order-row div {
+  margin: 0 20px;
+  min-width: 80px;
+  font-size: 14px;
+}
+.admin-interface-info-container .order-management-container .order-row .order-row-list {
+  min-width: 370px;
+  padding: 0 20px;
+  margin: 0;
+}
+.admin-interface-info-container .order-management-container .order-row .order-row-message {
+  width: 200px;
+  max-height: 100px;
+  padding: 0 20px;
+  margin: 0;
+  overflow-y: auto;
+}
+.admin-interface-info-container .order-management-container .order-row .orders-client-info-box {
+  display: flex;
+  flex-direction: column;
+  padding-left: 20px;
+  max-width: 250px;
+}
+.admin-interface-info-container .order-management-container .order-row .status-date-box {
+  max-width: 200px;
+  display: flex;
+  flex-direction: column;
+}
+.admin-interface-info-container .order-management-container .order-row .status-date-box div {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+}
+.admin-interface-info-container .order-management-container .order-row .update-order-button {
+  width: 100px;
+  height: 80px;
+  font-size: 16px;
+  padding: 5px;
+  margin: 0 10px;
+  border: none;
+  outline: none;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+  transition: 0.3s;
+}
+.admin-interface-info-container .order-management-container .order-row .update-order-button:hover {
+  background-color: #bebcbc;
+}
+
 @font-face {
   font-family: "MyWebFont";
   src: url("webfont.eot");
@@ -515,12 +734,13 @@
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   font-family: "MyWebFont", "Quicksand";
-  margin: 0;
-  padding: 0;
+  color: #242E4C;
 }
 
-.main {
+.page-container {
   padding-top: 71px;
+  position: relative;
+  min-height: 100vh;
 }
 
 .display-flex {
