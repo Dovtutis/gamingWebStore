@@ -35,7 +35,23 @@ class AdminController extends Controller
      * @return string|string[]
      */
     public function adminInferface(Request $request)
-    {
+    {   
+        $orders = $this->ordersModel->getAllOrders();
+        for ($i=0; $i < count($orders); $i++) { 
+            $orderItems = [];
+            $orders[$i]->user = $this->userModel->getUserById($orders[$i]->user_id);
+            $orderList = json_decode($orders[$i]->order_list);
+
+            foreach ($orderList as $order) {
+                $itemObj = new \stdClass();
+                $item = $this->itemsModel->getOne($order->item_id);
+                $itemObj->itemName = $item->item_name;
+                $itemObj->quantity = $order->item_quantity;
+                $itemObj->itemId = $item->item_id;
+                $orderItems[] = $itemObj;
+            }
+            $orders[$i]->order_list = $orderItems;
+        }
 
         if ($request->isGet()){
             $data = [
@@ -58,12 +74,12 @@ class AdminController extends Controller
                         'itemDescriptionError' => '',
                     ]
                 ],
+                'orders' => $orders
             ];
             return $this->render('adminPage', $data);
         }
 
         if ($request->isPost()){
-
             $data = $request->getBody();
 
             $data['item']['errors']['itemNameError'] = $this->validation->validateEmpty($data['itemName'], "Enter item name, input field can not bet empty");
@@ -81,13 +97,22 @@ class AdminController extends Controller
                 }else{
                     $data['response'] = false;
                 }
-            }else {
-                header('Content-Type: application/json');
-                echo json_encode($data);
             }
             header('Content-Type: application/json');
             echo json_encode($data);
         }
+    }
+
+    public function updateOrder (Request $request) {
+
+        $data = $request->getBody();
+
+            if ($this->ordersModel->updateOrder($data)){
+                $data['response'] = 'success';
+            }
+
+            header('Content-Type: application/json');
+            echo json_encode($data);
     }
 
     public function notFound()

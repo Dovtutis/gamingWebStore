@@ -1,6 +1,8 @@
 @import "config";
 @import "utilities";
 @import "./components/navbar";
+@import "./components/ui-interface";
+@import "./components/admin-interface";
 
 @font-face {
   font-family: 'MyWebFont';
@@ -16,12 +18,13 @@
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   font-family: $font-1;
-  margin: 0;
-  padding: 0;
+  color: $text-color-dark-blue;
 }
 
-.main {
+.page-container {
   padding-top: $navbar-height;
+  position: relative;
+  min-height: 100vh;
 }
 
 .display-flex {
@@ -31,6 +34,11 @@
 .display-none {
   display: none;
 }
+
+// .general-input {
+//   margin-bottom: 10px;
+// }
+
 
 // @import "large-screen";
 // @import "medium-screen";

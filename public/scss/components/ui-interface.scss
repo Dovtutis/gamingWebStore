@@ -1,12 +1,13 @@
 .ui-interface-page {
     width: 100%;
+    min-height: 100vh;
     background-color: $background-color-gray;
 
     .ui-interface-container {
         width: 90%;
+        height: 100%;
         margin: 0 auto;
         padding-top: 50px;
-        height: 800px;
         min-width: 280px;
         display: flex;
 

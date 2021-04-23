@@ -1,7 +1,27 @@
-.add-new-item-container {
+.admin-interface-info-container {
+    flex: 10;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+    height: 100%;
+    width: 100%;
+    overflow-x: scroll;
+
+    .response-message-element{
+        width: 100%;
+        margin: 10px auto;
+        display: block;
+        font-size: 22px;
+        color: yellowgreen;
+        text-align: center;
+        font-weight: 600;
+    }
+
+    .add-new-item-container {
     margin: 0 auto;
     padding: 30px;
     height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 
     #add-new-item-form label {
         margin-top: 10px;
@@ -27,8 +47,77 @@
 }
 
 .order-management-container {
-    display: none;
-    margin: 0 auto;
-    padding: 30px;
-    min-height: 800px;
+        display: none;
+        margin: 0 auto;
+        padding: 30px;
+        min-height: 800px;
+        flex-direction: column;
+
+        .order-row {
+            display: flex;
+            padding: 16px 0;
+            min-width: 1200px;
+
+            .order-row-id{
+                padding-left: 20px;
+            }
+
+            div {
+                margin: 0 20px;
+                min-width: 80px;
+                font-size: 14px;
+            }
+
+            .order-row-list {
+                min-width: 370px;
+                padding: 0 20px;
+                margin: 0;
+            }
+
+            .order-row-message {
+                width: 200px;
+                max-height: 100px;
+                padding: 0 20px;
+                margin: 0;
+                overflow-y: auto;
+            }
+
+            .orders-client-info-box {
+                display: flex;
+                flex-direction: column; 
+                padding-left: 20px;
+                max-width: 250px;
+            }
+
+            .status-date-box {
+                max-width: 200px;
+                display: flex;
+                flex-direction: column; 
+
+                div {
+                    display: flex;
+                    flex-direction: column; 
+                    margin: 0;
+                }
+            }
+            
+            .update-order-button {
+                width: 100px;
+                height: 80px;
+                font-size: 16px;
+                padding: 5px;
+                margin: 0 10px;
+                border: none;
+                outline: none;
+                box-shadow: 0 0 6px rgba(0, 0, 0, 0.4);
+                cursor: pointer;
+                transition: .3s;
+            }
+        
+            .update-order-button:hover {
+                background-color: #bebcbc;
+            }
+        }
+    }
 }
+

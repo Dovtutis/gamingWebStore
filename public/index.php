@@ -6,6 +6,7 @@ use app\core\AuthController;
 use app\core\Application;
 use app\controller\FeedbackController;
 use app\controller\UserController;
+use app\controller\AdminController;
 
 $dotenv = Dotenv\Dotenv::createImmutable(dirname(__DIR__));
 $dotenv->load();
@@ -23,10 +24,9 @@ $app = new Application(dirname(__DIR__), $config);
 $app->router->get('/', [SiteController::class, 'mainPage']);
 $app->router->get('/userAccount', [UserController::class, 'userAccount']);
 
-// $app->router->get('/feedback', [FeedbackController::class, 'index']);
-// $app->router->get('/feedback/getComments', [SiteController::class, 'notFound']);
-// $app->router->post('/feedback/getComments', [FeedbackController::class, 'getComments']);
-// $app->router->post('/feedback/addComment', [FeedbackController::class, 'addComment']);
+$app->router->get('/adminPanel', [AdminController::class, 'adminInferface']);
+$app->router->post('/adminPanel', [AdminController::class, 'adminInferface']);
+$app->router->post('/updateOrder', [AdminController::class, 'updateOrder']);
 
 $app->router->get('/register', [AuthController::class, 'register']);
 $app->router->post('/register', [AuthController::class, 'register']);

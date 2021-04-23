@@ -22,13 +22,15 @@ class ItemsModel
 
     public function add($data)
     {
-        $this->db->query("INSERT INTO items (`item_name`, `item_image`, `item_price`, `item_quantity`, `item_description`) 
-            VALUES (:item_name, :item_image, :item_price, :item_quantity, :item_description)");
-        $this->db->bind(':item_name', $data['item']['itemName']);
-        $this->db->bind(':item_image', $data['item']['itemImage']);
-        $this->db->bind(':item_price', $data['item']['itemPrice']);
-        $this->db->bind(':item_quantity', $data['item']['itemQuantity']);
-        $this->db->bind(':item_description', $data['item']['itemDescription']);
+        $this->db->query("INSERT INTO items (`item_name`, `item_type`, `item_image`, `item_video`, `item_price`, `item_quantity`, `item_description`) 
+            VALUES (:item_name, :item_type, :item_image, :item_video, :item_price, :item_quantity, :item_description)");
+        $this->db->bind(':item_name', $data['itemName']);
+        $this->db->bind(':item_type', $data['itemType']);
+        $this->db->bind(':item_image', $data['itemImage']);
+        $this->db->bind(':item_video', $data['itemVideo']);
+        $this->db->bind(':item_price', $data['itemPrice']);
+        $this->db->bind(':item_quantity', $data['itemQuantity']);
+        $this->db->bind(':item_description', $data['itemDescription']);
 
         if ($this->db->execute()){
             return true;

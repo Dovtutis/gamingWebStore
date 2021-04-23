@@ -74,9 +74,9 @@ class OrdersModel
 
     public function updateOrder($data) {
         $this->db->query("UPDATE orders SET `message` = :orderMessage, `status` = :orderStatus WHERE id = :id");
-        $this->db->bind(':orderMessage', $data['orderMessage']);
-        $this->db->bind(':orderStatus', $data['orderStatus']);
-        $this->db->bind(':id', $data['orderId']);
+        $this->db->bind(':orderMessage', $data['order-message']);
+        $this->db->bind(':orderStatus', $data['order-status']);
+        $this->db->bind(':id', $data['order-id']);
         if ($this->db->execute()){
             return true;
         }else {

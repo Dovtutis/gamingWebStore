@@ -1,4 +1,6 @@
-<?php use \app\core\html\FormField;?>
+<?php
+
+use \app\core\html\FormField; ?>
 
 <div class="ui-interface-page">
     <div class="ui-interface-container">
@@ -10,14 +12,15 @@
                 Order management
             </button>
         </div>
-        <div class="ui-interface-info-container">
+        <div class="admin-interface-info-container">
+            <span class="response-message-element" id="add-new-item-message-element"></span>
             <div class="add-new-item-container" id="add-new-item-container">
                 <span class="admin-panel-headline">Add new item</span>
                 <form action="" method="post" autocomplete="off" id="add-new-item-form">
                     <?php echo new FormField('itemName', 'itemName', 'general-input', 'Item Name:', 'text', '*', '', $item); ?>
                     <label for="itemType">Choose item type:</label>
-                    <select class="form-select general-input" aria-label="type select"  name="itemType" id="itemType">
-                        <option selected>Choose item type</option>
+                    <select class="form-select general-input" aria-label="type select" name="itemType" id="itemType">
+                        <option value=null selected>Choose item type</option>
                         <option value="console">Console</option>
                         <option value="accessory">Accessory</option>
                         <option value="game">Game</option>
@@ -39,12 +42,57 @@
                 </form>
             </div>
             <div class="order-management-container" id="order-management-container">
-                menedzinam orderius kaip deremae
+                <?php foreach ($orders as $order) : ?>
+                    <form class="order-update-form">
+                        <div class="order-row">
+                            <div>
+                                <strong>Order id:</strong>
+                                <p class="order-row-id">
+                                    <?php echo $order->id ?>
+                                </p>
+                            </div>
+                            <div class="order-list-container">
+                                <strong>Ordered items:</strong>
+                                <?php foreach ($order->order_list as $item) : ?>
+                                    <p class="order-row-list">
+                                        <a href="<?php echo 'eshop/showItem/' . $item->itemId ?>">
+                                            <?php echo $item->itemName ?></a><?php echo ", " . $item->quantity . " items" ?>
+                                    </p>
+                                <?php endforeach ?>
+                            </div>
+                            <div>
+                                <strong>Message:</strong>
+                                <textarea rows="4" cols="20" class="order-row-textarea" name="order-message"><?php echo $order->message ?></textarea>
+                            </div>
+                            <div class="status-date-box">
+                                <strong><span>Order status:</span></strong>
+                                <div>
+                                    <textarea rows="4" cols="20" name="order-status"><?php echo $order->status ?></textarea>
+                                </div>
+                            </div>
+                            <div class="orders-client-info-box">
+                                <strong><span>Client info:</span></strong>
+                                <div>
+                                    <span><?php echo $order->user->firstname . " " . $order->user->lastname ?></span>
+                                    <span><?php echo $order->user->address ?></span>
+                                    <span><?php echo $order->user->email ?></span>
+                                    <span><?php echo $order->user->phone ?></span>
+                                </div>
+                            </div>
+                            <div>
+                                <strong>Order date:</strong>
+                                <p class="order-row-id">
+                                    <?php echo $order->date ?>
+                                </p>
+                            </div>
+                            <button type="submit" class="update-order-button">Update Order</button>
+                        </div>
+                    </form>
+                <?php endforeach ?>
             </div>
         </div>
     </div>
 </div>
-
 
 <script>
     const addNewItemContainerEl = document.getElementById('add-new-item-container');
@@ -60,6 +108,9 @@
     const itemPriceEl = document.getElementById('itemPrice');
     const itemQuantityEl = document.getElementById('itemQuantity');
     const itemDescriptionEl = document.getElementById('itemDescription');
+    const allInputEl = document.querySelectorAll('.general-input');
+    const addNewItemMessageEl = document.getElementById('add-new-item-message-element');
+    const updateOrderButtons = document.querySelectorAll('.update-order-button');
 
     let errorsAndElements = {
         itemNameError: itemNameEl,
@@ -74,15 +125,20 @@
     addNewItemContainerButton.addEventListener('click', showAddNewItemContainer);
     orderManagementContainerButton.addEventListener('click', showOrderManagementContainer);
     addNewItemButton.addEventListener('click', addNewItem);
+    updateOrderButtons.forEach(button => {
+        button.addEventListener('click', updateOrder);
+    })
 
     function showAddNewItemContainer(params) {
         addNewItemContainerEl.style.display = "block";
         managerOrdersContainerEl.style.display = "none";
+        addNewItemMessageEl.innerText = "";
     }
 
     function showOrderManagementContainer(params) {
-        managerOrdersContainerEl.style.display = "block";
+        managerOrdersContainerEl.style.display = "flex";
         addNewItemContainerEl.style.display = "none";
+        addNewItemMessageEl.innerText = "";
     }
 
     function addNewItem(e) {
@@ -91,18 +147,39 @@
         const formData = new FormData(addNewItemForm);
 
         fetch('/adminPanel', {
-            method: 'post',
-            body: formData
-        }).then(resp => resp.text())
+                method: 'post',
+                body: formData
+            }).then(resp => resp.json())
             .then(data => {
-                console.log(data)
-                if (data.item.errors){
+                console.log(data['response']);
+                if (data.item.errors) {
                     handleErrors(data.item.errors);
+                }
+                if (data['response']) {
+                    handleSuccess();
                 }
             }).catch(error => console.error())
     }
 
-    function handleErrors(errors){
+    function updateOrder(e) {
+        e.preventDefault();
+        const orderId = Number(event.target.form.children[0].children[0].children[1].innerText);
+        const formData = new FormData(event.target.form);
+        formData.append('order-id', orderId);
+
+        fetch('/updateOrder', {
+            method: 'post',
+            body: formData
+        }).then(resp => resp.json())
+            .then(data => {
+                console.log(data)
+                if (data.response === "success") {
+                    addNewItemMessageEl.innerText = "Order edited successfully";
+                }
+            }).catch(error => console.error())
+    }
+
+    function handleErrors(errors) {
         let possibleErrors = Object.keys(errorsAndElements);
         for (let i = 0; i < possibleErrors.length; i++) {
             let errorName = possibleErrors[i];
@@ -114,12 +191,20 @@
         }
     }
 
-    function resetErrors(){
+    function resetErrors() {
         const errorEl = addNewItemForm.querySelectorAll('.is-invalid');
         errorEl.forEach((element) => {
             element.classList.remove('is-invalid');
         });
+        addNewItemMessageEl.innerText = "";
     }
 
-
+    function handleSuccess() {
+        itemDescriptionEl.value = "";
+        itemTypeEl.value = null;
+        allInputEl.forEach(element => {
+            element.value = ""
+        });
+        addNewItemMessageEl.innerText = "Item added successfully";
+    }
 </script>
