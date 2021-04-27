@@ -23,8 +23,12 @@ class SiteController extends Controller
 
     public function mainPage(Request $request, $searchQuery = null)
     {   
+        
         if ($searchQuery === null) {
             $items = $this->itemsModel->getAll();
+        } else {
+            $searchParam = $searchQuery['value'];
+            $items = $this->itemsModel->search($searchParam);
         }
 
         $params = [

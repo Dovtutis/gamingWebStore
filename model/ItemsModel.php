@@ -57,7 +57,8 @@ class ItemsModel
         if ($this->db->rowCount() > 0){
             return $result;
         }
-        return false;
+        $result = [];
+        return $result;
     }
 
     public function getByType($type)

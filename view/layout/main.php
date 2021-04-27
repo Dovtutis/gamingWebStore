@@ -1,4 +1,4 @@
-<?php;?>
+<?php ?>
 
 <!doctype html>
 <html lang="en">
@@ -7,8 +7,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-    <link rel="stylesheet" href="./css/style.css">
-    <link rel="stylesheet" href="./css/navbar.css">
+    <link rel="stylesheet" href="/css/style.css">
     <title>Gaming World</title>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -21,12 +20,12 @@
         <nav>
             <div id="navbar-container">
                 <div class="container" id="navbar-inner-container">
-                    <a href="/" class="home-link">
+                    <a href="/main" class="home-link">
                         <div class="nav-logo">GAMING WORLD</div>
                     </a>
                     <div id="search-box">
                         <input type="text" placeholder="Enter for search..." name="serach-input" id="search-input">
-                        <a href=""><i class="fas fa-search" id="search-button"></i></a>
+                        <a href="" id="search-link"><i class="fas fa-search" id="search-button"></i></a>
                     </div>
                     <button type="button" class="navbar-toggle">
                         <i class="fas fa-bars navbar-bars"></i>
@@ -68,6 +67,10 @@
     const navbarMenu = document.querySelector(".navbar-menu");
     const navbarLinksContainer = document.querySelector(".navbar-links");
     const navbarLinks = document.querySelectorAll(".navbar-link")
+    const searchEl = document.getElementById('search-input');
+    const searchLinkEl = document.getElementById('search-link');
+
+    searchEl.addEventListener('input', searchQuery);
 
     navbarToggle.addEventListener("click", () => {
         if (navbar.classList.contains("opened")) {
@@ -93,6 +96,10 @@
 
     function closeMobileNavbar() {
         navbar.classList.remove("opened");
+    }
+
+    function searchQuery(event) {
+        searchLinkEl.setAttribute('href', `/main/${event.target.value}`)
     }
 
 </script>

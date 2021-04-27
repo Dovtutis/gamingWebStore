@@ -21,7 +21,7 @@ $config = [
 
 $app = new Application(dirname(__DIR__), $config);
 
-$app->router->get('/', [SiteController::class, 'mainPage']);
+$app->router->get('/main', [SiteController::class, 'mainPage']);
 $app->router->get('/userAccount', [UserController::class, 'userAccount']);
 
 $app->router->get('/adminPanel', [AdminController::class, 'adminInferface']);
