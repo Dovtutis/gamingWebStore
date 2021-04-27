@@ -27,6 +27,7 @@ $app->router->get('/userAccount', [UserController::class, 'userAccount']);
 $app->router->get('/adminPanel', [AdminController::class, 'adminInferface']);
 $app->router->post('/adminPanel', [AdminController::class, 'adminInferface']);
 $app->router->post('/updateOrder', [AdminController::class, 'updateOrder']);
+$app->router->post('/fetchItems', [SiteController::class, 'fetchItemsByType']);
 
 $app->router->get('/register', [AuthController::class, 'register']);
 $app->router->post('/register', [AuthController::class, 'register']);

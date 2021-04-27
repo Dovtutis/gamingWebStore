@@ -60,6 +60,17 @@ class ItemsModel
         return false;
     }
 
+    public function getByType($type)
+    {
+        $this->db->query("SELECT * FROM items WHERE item_type = :item_type");
+        $this->db->bind(':item_type', $type);
+        $result = $this->db->resultSet();
+        if ($this->db->rowCount() > 0){
+            return $result;
+        }
+        return false;
+    }
+
     public function getOne($id)
     {
         $this->db->query("SELECT * FROM items WHERE item_id = :id");

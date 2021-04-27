@@ -104,7 +104,7 @@ class AdminController extends Controller
     }
 
     public function updateOrder (Request $request) {
-
+        
         $data = $request->getBody();
 
             if ($this->ordersModel->updateOrder($data)){
