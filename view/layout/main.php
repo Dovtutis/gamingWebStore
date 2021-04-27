@@ -71,6 +71,12 @@
     const searchLinkEl = document.getElementById('search-link');
 
     searchEl.addEventListener('input', searchQuery);
+    searchEl.addEventListener("keyup", function(event) {
+  if (event.keyCode === 13) {
+    event.preventDefault();
+    window.location.replace(`/main/${event.target.value}`);
+  }
+}); 
 
     navbarToggle.addEventListener("click", () => {
         if (navbar.classList.contains("opened")) {
