@@ -97,6 +97,7 @@
         if (userId) {
             const info = {
                 itemId: event.target.id,
+                itemQuantity: 1,
                 userId: userId
             }
 

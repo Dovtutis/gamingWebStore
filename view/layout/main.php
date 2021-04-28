@@ -50,12 +50,13 @@
             </div>
         </nav>
     </header>
-
+                            
 
     <div class="page-container">
         {{content}}
     </div>
 
+    <?php var_dump($currentPage)?>
 </body>
 
 </html>

@@ -140,7 +140,7 @@ class Router
      */
     public function renderView(string $view, array $params = [])
     {
-        $layout = $this->layoutContent();
+        $layout = $this->layoutContent($params);
         $page = $this->pageContent($view, $params);
 
         // take layout and replace the {{content}} with the $page content
@@ -152,13 +152,18 @@ class Router
      *
      * @return false|string
      */
-    protected function layoutContent()
+    protected function layoutContent($params)
     {
         if (isset(Application::$app->controller)):
             $layout = Application::$app->controller->layout;
         else:
             $layout = 'main';
         endif;
+        
+        foreach ($params as $key => $value):
+            $$key = $value;
+        endforeach;
+
         // start buffering
         ob_start();
         include_once Application::$ROOT_DIR."/view/layout/$layout.php";

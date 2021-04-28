@@ -35,16 +35,40 @@ class ShoppingCartController extends Controller
 
         $itemId = $decoded['info']['itemId'];
         $userId = $decoded['info']['userId'];
+        $itemQuantity = $decoded['info']['itemQuantity'];
 
-        $quantityBool = $this->shoppingCartModel->checkQuantity($itemId, 1);
+        $quantityBool = $this->shoppingCartModel->checkQuantity($itemId, $itemQuantity);
+        $shoppingCart = $this->shoppingCartModel->getAll($userId);
+
 
         if ($quantityBool) {
-            $data = [
-                'user_id' => $userId,
-                'item_id' => $itemId,
-                'item_quantity' => 1
+            $data['user_id'] = $userId;
+            $newItem = [
+                'itemId' => $itemId,
+                'itemQuantity' => $itemQuantity
             ];
-            $this->shoppingCartModel->add($data);
+
+            if ($shoppingCart) {
+                $data['shopping_cart_id'] = $shoppingCart[0]->shopping_cart_id;
+
+                $shoppingCartItems = $shoppingCart[0]->items;
+                $shoppingCartItems = json_decode($shoppingCartItems);
+                $shoppingCartItems[] = $newItem;
+                $shoppingCartItems = json_encode($shoppingCartItems);
+
+                $data['items'] = $shoppingCartItems;
+
+                $this->shoppingCartModel->edit($data);
+            } else {
+                $shoppingCartItems = [];
+                $shoppingCartItems[] = $newItem;
+                $shoppingCartItems = json_encode($shoppingCartItems);
+
+                $data['items'] = $shoppingCartItems;
+                
+                $this->shoppingCartModel->add($data);
+            }
+
             $data['response'] = true;
         } else {
             $data['response'] = false;
