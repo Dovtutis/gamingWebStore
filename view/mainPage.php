@@ -37,7 +37,7 @@
                         </a>
                         <p><?php echo $item->item_name ?></p>
                         <span>€<?php echo $item->item_price ?></span>
-                        <button class="items-container-add-to-cart-button"><i class="fas fa-cart-arrow-down"></i> Add to Cart</button>
+                        <button class="items-container-add-to-cart-button" id="<?php echo $item->item_id ?>"><i class="fas fa-cart-arrow-down"></i> Add to Cart</button>
                     </div>
                 <?php endforeach ?>
             </div>
@@ -51,11 +51,20 @@
     const navbarAccessoriesSelectionButton = document.getElementById('navbar-accessories-selection-button');
     const navbarGamesSelectionButton = document.getElementById('navbar-games-selection-button');
     const navbarOtherSelectionButton = document.getElementById('navbar-other-selection-button');
+    const shoppingCartCounterEl = document.getElementById('shopping-cart-counter');
+    const addToCartButtons = document.querySelectorAll('.items-container-add-to-cart-button');
+    const userId = <?php echo $_SESSION['user_id'] ?>;
 
     navbarConsolesSelectionButton.addEventListener('click', () => fetchForItemsByType('console'));
     navbarAccessoriesSelectionButton.addEventListener('click', () => fetchForItemsByType('accessory'));
     navbarGamesSelectionButton.addEventListener('click', () => fetchForItemsByType('game'));
     navbarOtherSelectionButton.addEventListener('click', () => fetchForItemsByType('other'));
+
+    addToCartButtons.forEach(button => {
+        button.addEventListener('click', addToShoppingCart);
+    });
+
+    shoppingCartCounterEl.innerText = <?php echo $cartQuantity->quantity ?>
 
     function fetchForItemsByType(selection) {
         fetch(`/fetchItems/${selection}`, {
@@ -84,4 +93,31 @@
         })
     }
 
+    function addToShoppingCart(event) {
+        if (userId) {
+            const info = {
+                itemId: event.target.id,
+                userId: userId
+            }
+
+            fetch(`/addToCart`, {
+                    method: "POST",
+                    mode: "same-origin",
+                    credentials: "same-origin",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        info: info
+                    })
+                }).then(resp => resp.text())
+                .then(data => {
+                    console.log(data)
+                    // if (data.success) {
+                    //     editQuantity(event);
+                    //     editShoppingCartCounter();
+                    // }
+                }).catch(error => console.error())
+        }
+    }
 </script>

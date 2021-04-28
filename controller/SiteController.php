@@ -7,6 +7,7 @@ use app\core\Application;
 use app\core\Controller;
 use app\core\Request;
 use app\model\ItemsModel;
+use app\model\ShoppingCartModel;
 
 class SiteController extends Controller
 {
@@ -19,6 +20,8 @@ class SiteController extends Controller
     public function __construct()
     {
         $this->itemsModel = new ItemsModel();
+        $this->shoppingCartModel = new ShoppingCartModel();
+
     }
 
     public function mainPage(Request $request, $searchQuery = null)
@@ -29,6 +32,12 @@ class SiteController extends Controller
         } else {
             $searchParam = $searchQuery['value'];
             $items = $this->itemsModel->search($searchParam);
+        }
+
+        $userId = $_SESSION['user_id'];
+
+        if ($_SESSION['status'] === "customer") {
+            $cartQuantity = $this->shoppingCartModel->getCartQuantity($userId);
         }
 
         $params = [
@@ -52,7 +61,8 @@ class SiteController extends Controller
                     'alt' => 'Returnal'
                 ],
             ],
-            'items' => $items
+            'items' => $items,
+            'cartQuantity' => $cartQuantity
         ];
         return $this->render('mainPage', $params);
     }

@@ -38,7 +38,7 @@
                             <?php else : ?>
                                 <?php if($_SESSION['status'] === 'customer') :?>
                                     <li class="navbar-item px-1"><a class="navbar-link" href="/userAccount">My Account</a></li>
-                                    <li class="navbar-item px-1"><a class="navbar-link" href="#navbar-tag-contact">Shopping Cart</a></li>
+                                    <li class="navbar-item px-1"><a class="navbar-link" href="#navbar-tag-contact">Shopping Cart (<span id="shopping-cart-counter">0</span>)</a></li>
                                 <?php else : ?>
                                     <li class="navbar-item px-1"><a class="navbar-link" href="/adminPanel">Admin Panel</a></li>
                                 <?php endif; ?>   
@@ -51,10 +51,10 @@
         </nav>
     </header>
 
+
     <div class="page-container">
         {{content}}
     </div>
-
 
 </body>
 

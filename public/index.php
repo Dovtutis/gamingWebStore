@@ -4,9 +4,9 @@ require_once '../vendor/autoload.php';
 use app\controller\SiteController;
 use app\core\AuthController;
 use app\core\Application;
-use app\controller\FeedbackController;
 use app\controller\UserController;
 use app\controller\AdminController;
+use app\controller\ShoppingCartController;
 
 $dotenv = Dotenv\Dotenv::createImmutable(dirname(__DIR__));
 $dotenv->load();
@@ -34,6 +34,8 @@ $app->router->post('/register', [AuthController::class, 'register']);
 
 $app->router->post('/editUser', [AuthController::class, 'edit']);
 $app->router->post('/changePassword', [AuthController::class, 'changePassword']);
+
+$app->router->post('/addToCart', [ShoppingCartController::class, 'addToCart']);
 
 $app->router->get('/login', [AuthController::class, 'login']);
 $app->router->post('/login', [AuthController::class, 'login']);

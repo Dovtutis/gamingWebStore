@@ -140,7 +140,7 @@ class Router
      */
     public function renderView(string $view, array $params = [])
     {
-        $layout = $this->layoutContent();;
+        $layout = $this->layoutContent();
         $page = $this->pageContent($view, $params);
 
         // take layout and replace the {{content}} with the $page content

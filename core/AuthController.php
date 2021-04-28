@@ -165,9 +165,9 @@ class AuthController extends Controller
             unset($_SESSION['user_firstname']);
 
             session_destroy();
-            $request->redirect('/');
+            $request->redirect('/main');
         }else{
-            $request->redirect('/');
+            $request->redirect('/main');
         }
     }
 

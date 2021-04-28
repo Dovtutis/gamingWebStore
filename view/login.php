@@ -45,7 +45,7 @@ use \app\core\html\FormField;
             .then(data => {
                 console.log(data);
                 if (data === "loginSuccessful"){
-                    window.location.replace("/");
+                    window.location.replace("/main");
                 }
                 if (data.errors){
                     handleErrors(data.errors);
