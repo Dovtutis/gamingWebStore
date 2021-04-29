@@ -793,6 +793,10 @@
   border: none;
   background-color: #dfdddd;
 }
+.items-main-container .items-container-card .item-out-of-stock-error {
+  color: tomato;
+  cursor: not-allowed;
+}
 .items-main-container .items-container-card .items-container-add-to-cart-button:hover {
   background-color: #acacac;
 }

@@ -72,8 +72,14 @@
                 outline: none;
                 border: none;
                 background-color: #dfdddd;
+
             }
-    
+            
+            .item-out-of-stock-error {
+                color: tomato;
+                cursor: not-allowed;
+            }
+
             .items-container-add-to-cart-button:hover {
                 background-color: $background-color-gray-very-strong;
             }

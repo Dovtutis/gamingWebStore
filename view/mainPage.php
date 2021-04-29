@@ -37,13 +37,19 @@
                         </a>
                         <p><?php echo $item->item_name ?></p>
                         <span>€<?php echo $item->item_price ?></span>
-                        <button class="items-container-add-to-cart-button" id="<?php echo $item->item_id ?>"><i class="fas fa-cart-arrow-down"></i> Add to Cart</button>
+                        <?php if($item->item_quantity == 0) : ?>
+                            <button class="items-container-add-to-cart-button item-out-of-stock-error" id="<?php echo $item->item_id ?>">Sorry. Out of stock!</button>
+                        <?php else : ?>
+                            <button class="items-container-add-to-cart-button" id="<?php echo $item->item_id ?>"><i class="fas fa-cart-arrow-down"></i> Add to Cart</button>
+                        <?php endif ?>
                     </div>
                 <?php endforeach ?>
             </div>
         </div>
     </article>
 </main>
+
+<?php var_dump($items) ?>
 
 <script>
     const itemsContainerEl = document.querySelector('.items-container');
@@ -78,16 +84,30 @@
 
         itemsContainerEl.innerHTML = "";
         items.map(item => {
-            itemsContainerEl.innerHTML += `
-                <div class="items-container-card">
-                    <a href="/${item.item_id}">
-                        <img src="${item.item_image}"></img>
-                    </a>
-                    <p>${item.item_name}</p>
-                    <span>€${item.item_price}</span>
-                    <button class="items-container-add-to-cart-button"><i class="fas fa-cart-arrow-down"></i>Add to Cart</button>
-                </div>
-            `
+            const card = document.createElement('div');
+            card.classList.add('items-container-card');
+            const anchor = document.createElement('a');
+            anchor.setAttribute("href", `${item.item_id}`);
+            anchor.innerHTML = `<img src="${item.item_image}"></img>`;
+            const paragraph = document.createElement('p');
+            paragraph.innerHTML = item.item_name;
+            const span = document.createElement('span');
+            span.innerHTML = `€${item.item_price}`;
+            const button = document.createElement('button');
+            button.classList.add('items-container-add-to-cart-button');
+            button.innerHTML = '<i class="fas fa-cart-arrow-down"></i>Add to Cart'
+
+            if (item.item_quantity == 0) {
+                button.classList.add('item-out-of-stock-error');
+                button.innerHTML = 'Sorry! Out of stock!';
+            }
+
+            card.appendChild(anchor);
+            card.appendChild(paragraph);
+            card.appendChild(span);
+            card.appendChild(button);
+
+            itemsContainerEl.appendChild(card);
         })
     }
 
@@ -115,7 +135,7 @@
                     if (data.response === true) {
                         editShoppingCartCounter(data.items_quantity);
                     }else {
-                        alert("out of stock!");
+                        handleOutOfStock(event);
                     }
                 }).catch(error => console.error())
         }
@@ -123,5 +143,11 @@
 
     function editShoppingCartCounter(quantity) {
         shoppingCartCounterEl.innerHTML = quantity;
+    }
+
+    function handleOutOfStock(event) {
+        event.target.innerHTML = "Sorry. Out of stock!";
+        event.target.classList.add("item-out-of-stock-error");
+        event.target.setAttribute("disabled", true);
     }
 </script>
