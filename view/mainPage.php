@@ -37,7 +37,7 @@
                         </a>
                         <p><?php echo $item->item_name ?></p>
                         <span>€<?php echo $item->item_price ?></span>
-                        <?php if($item->item_quantity == 0) : ?>
+                        <?php if ($item->item_quantity == 0) : ?>
                             <button class="items-container-add-to-cart-button item-out-of-stock-error" id="<?php echo $item->item_id ?>">Sorry. Out of stock!</button>
                         <?php else : ?>
                             <button class="items-container-add-to-cart-button" id="<?php echo $item->item_id ?>"><i class="fas fa-cart-arrow-down"></i> Add to Cart</button>
@@ -132,16 +132,19 @@
                 .then(data => {
                     console.log(data)
                     if (data.response === true) {
-                        editShoppingCartCounter(data.items_quantity);
-                    }else {
+                        handleSuccess(event, data.items_quantity);
+                    } else {
                         handleOutOfStock(event);
                     }
                 }).catch(error => console.error())
         }
     }
 
-    function editShoppingCartCounter(quantity) {
+    function handleSuccess(event, quantity) {
         shoppingCartCounterEl.innerHTML = quantity;
+        event.target.innerHTML = "Added to the cart!";
+
+        setTimeout(() => { event.target.innerHTML = '<i class="fas fa-cart-arrow-down"></i> Add to Cart'; }, 2000);
     }
 
     function handleOutOfStock(event) {
