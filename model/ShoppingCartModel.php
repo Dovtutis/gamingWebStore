@@ -65,16 +65,6 @@ class ShoppingCartModel
         return false;
     }
 
-    public function checkQuantity($item_id, $item_quantity)
-    {
-        $this->db->query("SELECT IF(item_quantity >= :item_quantity, true, false) AS response FROM items WHERE item_id = :item_id");
-        $this->db->bind(':item_quantity', $item_quantity);
-        $this->db->bind(':item_id', $item_id);
-        $result = $this->db->singleRow();
-        $result = $result->response;
-        return $result;
-    }
-
     public function edit($data)
     {
         $this->db->query("UPDATE shopping_cart SET items = :items, items_quantity = :items_quantity WHERE shopping_cart_id = :shopping_cart_id");

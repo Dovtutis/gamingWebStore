@@ -106,4 +106,15 @@ class ItemsModel
             return false;
         }
     }
+
+    
+    public function checkQuantity($item_id, $item_quantity)
+    {
+        $this->db->query("SELECT IF(item_quantity >= :item_quantity, true, false) AS response FROM items WHERE item_id = :item_id");
+        $this->db->bind(':item_quantity', $item_quantity);
+        $this->db->bind(':item_id', $item_id);
+        $result = $this->db->singleRow();
+        $result = $result->response;
+        return $result;
+    }
 }

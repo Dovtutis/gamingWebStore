@@ -37,7 +37,9 @@ class ShoppingCartController extends Controller
         $userId = $decoded['info']['userId'];
         $itemQuantity = $decoded['info']['itemQuantity'];
 
-        $quantityBool = $this->shoppingCartModel->checkQuantity($itemId, $itemQuantity);
+        $quantityBool = $this->itemsModel->checkQuantity($itemId, $itemQuantity);
+        $itemQuantityFromDatabase = $this->itemsModel->getItemQuantity($itemId);
+        $itemQuantityFromDatabase = $itemQuantityFromDatabase->item_quantity;
         $shoppingCart = $this->shoppingCartModel->getAll($userId);
 
 
@@ -47,6 +49,7 @@ class ShoppingCartController extends Controller
                 'itemId' => $itemId,
                 'itemQuantity' => $itemQuantity
             ];
+            $itemQuantityFromDatabase = $itemQuantityFromDatabase - $itemQuantity;
 
             if ($shoppingCart) {
                 $data['shopping_cart_id'] = $shoppingCart[0]->shopping_cart_id;
@@ -73,6 +76,7 @@ class ShoppingCartController extends Controller
                 $data['items'] = $shoppingCartItems;
 
                 $this->shoppingCartModel->edit($data);
+                $this->itemsModel->editItemQuantity($itemId, $itemQuantityFromDatabase);
             } else {
                 $shoppingCartItems = [];
                 $shoppingCartItems[] = $newItem;
@@ -82,6 +86,7 @@ class ShoppingCartController extends Controller
                 $data['items_quantity'] = 1;
                 
                 $this->shoppingCartModel->add($data);
+                $this->itemsModel->editItemQuantity($itemId, $itemQuantityFromDatabase);
             }
 
             $data['response'] = true;

@@ -49,8 +49,6 @@
     </article>
 </main>
 
-<?php var_dump($items) ?>
-
 <script>
     const itemsContainerEl = document.querySelector('.items-container');
     const navbarConsolesSelectionButton = document.getElementById('navbar-consoles-selection-button');
@@ -75,6 +73,7 @@
                 method: 'post',
             }).then(resp => resp.json())
             .then(data => {
+                console.log(data);
                 handleItems(data.items);
             }).catch(error => console.error())
     }
@@ -131,7 +130,7 @@
                     })
                 }).then(resp => resp.json())
                 .then(data => {
-                    console.log(data.response)
+                    console.log(data)
                     if (data.response === true) {
                         editShoppingCartCounter(data.items_quantity);
                     }else {
