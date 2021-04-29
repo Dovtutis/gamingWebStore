@@ -64,8 +64,6 @@
         button.addEventListener('click', addToShoppingCart);
     });
 
-    shoppingCartCounterEl.innerText = <?php echo $cartQuantity->quantity ?>
-
     function fetchForItemsByType(selection) {
         fetch(`/fetchItems/${selection}`, {
                 method: 'post',
@@ -111,14 +109,19 @@
                     body: JSON.stringify({
                         info: info
                     })
-                }).then(resp => resp.text())
+                }).then(resp => resp.json())
                 .then(data => {
-                    console.log(data)
-                    // if (data.success) {
-                    //     editQuantity(event);
-                    //     editShoppingCartCounter();
-                    // }
+                    console.log(data.response)
+                    if (data.response === true) {
+                        editShoppingCartCounter(data.items_quantity);
+                    }else {
+                        alert("out of stock!");
+                    }
                 }).catch(error => console.error())
         }
+    }
+
+    function editShoppingCartCounter(quantity) {
+        shoppingCartCounterEl.innerHTML = quantity;
     }
 </script>

@@ -53,9 +53,23 @@ class ShoppingCartController extends Controller
 
                 $shoppingCartItems = $shoppingCart[0]->items;
                 $shoppingCartItems = json_decode($shoppingCartItems);
-                $shoppingCartItems[] = $newItem;
-                $shoppingCartItems = json_encode($shoppingCartItems);
 
+                $existingItemTrigger = false;
+
+                for ($i=0; $i < count($shoppingCartItems); $i++) { 
+                    if ($shoppingCartItems[$i]->itemId === $itemId) {
+                        $shoppingCartItems[$i]->itemQuantity += $itemQuantity;
+                        $existingItemTrigger = true;
+                        break;
+                    }
+                }
+
+                if (!$existingItemTrigger) {
+                    $shoppingCartItems[] = $newItem;
+                }
+
+                $data['items_quantity'] = count($shoppingCartItems);
+                $shoppingCartItems = json_encode($shoppingCartItems);
                 $data['items'] = $shoppingCartItems;
 
                 $this->shoppingCartModel->edit($data);
@@ -65,6 +79,7 @@ class ShoppingCartController extends Controller
                 $shoppingCartItems = json_encode($shoppingCartItems);
 
                 $data['items'] = $shoppingCartItems;
+                $data['items_quantity'] = 1;
                 
                 $this->shoppingCartModel->add($data);
             }

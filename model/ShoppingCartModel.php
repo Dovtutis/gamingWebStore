@@ -17,10 +17,11 @@ class ShoppingCartModel
 
     public function add($data)
     {
-        $this->db->query("INSERT INTO shopping_cart (`user_id`, `items`) 
-    VALUES (:user_id, :items)");
+        $this->db->query("INSERT INTO shopping_cart (`user_id`, `items`, `items_quantity`) 
+    VALUES (:user_id, :items, :items_quantity)");
         $this->db->bind(':user_id', $data['user_id']);
         $this->db->bind(':items', $data['items']);
+        $this->db->bind(':items_quantity', $data['items_quantity']);
 
         if ($this->db->execute()){
             return true;
@@ -76,9 +77,10 @@ class ShoppingCartModel
 
     public function edit($data)
     {
-        $this->db->query("UPDATE shopping_cart SET items = :items WHERE shopping_cart_id = :shopping_cart_id");
+        $this->db->query("UPDATE shopping_cart SET items = :items, items_quantity = :items_quantity WHERE shopping_cart_id = :shopping_cart_id");
         $this->db->bind(':items', $data['items']);
         $this->db->bind(':shopping_cart_id', $data['shopping_cart_id']);
+        $this->db->bind(':items_quantity', $data['items_quantity']);
         if ($this->db->execute()){
             return true;
         }else {
@@ -100,7 +102,8 @@ class ShoppingCartModel
 
     public function getCartQuantity($user_id)
     {
-        $this->db->query("SELECT count(*) as quantity FROM shopping_cart WHERE user_id = :user_id");
+        // $this->db->query("SELECT count(*) as quantity FROM shopping_cart WHERE user_id = :user_id");
+        $this->db->query("SELECT items_quantity FROM shopping_cart WHERE user_id = :user_id");
         $this->db->bind(':user_id', $user_id);
         $row = $this->db->singleRow();
         if ($this->db->rowCount() > 0){
