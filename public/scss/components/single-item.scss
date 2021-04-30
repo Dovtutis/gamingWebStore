@@ -71,14 +71,19 @@
                 background-color: #4cd137;
                 color: whitesmoke;
                 transition: .3s;
-
                 i {
                     color: whitesmoke;
                     margin: 0 10px;
                 }
             }
 
-            button:hover {
+            .item-out-of-stock-error {
+                color: whitesmoke;
+                background-color: tomato;
+                cursor: not-allowed;
+            }
+
+            .allowed:hover {
                 background-color: #3eac2d;
             }
         }

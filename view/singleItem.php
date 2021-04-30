@@ -20,15 +20,19 @@
             <?php echo $item->item_description ?>
         </p>
         <div class="single-item-add-to-cart-box">
-            <button class="add-to-cart-button" id="<?php echo $item->item_id ?>">
-                <i class="fas fa-cart-arrow-down"></i>Add to Cart
-            </button>
+            <?php if ($item->item_quantity == 0) : ?>
+                <button class="items-container-add-to-cart-button item-out-of-stock-error" id="<?php echo $item->item_id ?>">Sorry. Out of stock!</button>
+            <?php else : ?>
+                <button class="add-to-cart-button allowed" id="<?php echo $item->item_id ?>">
+                    <i class="fas fa-cart-arrow-down"></i>Add to Cart
+                </button>
+            <?php endif ?>
         </div>
     </div>
 </div>
 
 <script>
-    const userId = <?php echo $_SESSION['user_id'] ?>;     
+    const userId = <?php echo $_SESSION['user_id'] ?>;
     const addToCartButton = document.querySelector('.add-to-cart-button');
     const shoppingCartCounterEl = document.getElementById('shopping-cart-counter');
     const itemQuantityCounterEl = document.getElementById('item-quantity-counter');
@@ -77,6 +81,7 @@
     function handleOutOfStock(event) {
         event.target.innerHTML = "Sorry. Out of stock!";
         event.target.classList.add("item-out-of-stock-error");
+        event.target.classList.remove("allowed");
         event.target.setAttribute("disabled", true);
     }
 </script>

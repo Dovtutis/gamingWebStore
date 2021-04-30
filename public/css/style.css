@@ -871,7 +871,12 @@
   color: whitesmoke;
   margin: 0 10px;
 }
-.single-item-container .single-item-right-container .single-item-add-to-cart-box button:hover {
+.single-item-container .single-item-right-container .single-item-add-to-cart-box .item-out-of-stock-error {
+  color: whitesmoke;
+  background-color: tomato;
+  cursor: not-allowed;
+}
+.single-item-container .single-item-right-container .single-item-add-to-cart-box .allowed:hover {
   background-color: #3eac2d;
 }
 
