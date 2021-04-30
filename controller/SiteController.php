@@ -77,6 +77,23 @@ class SiteController extends Controller
         echo json_encode($data);
     }
 
+    public function singleItem(Request $request, $itemId)
+    {
+        $userId = $_SESSION['user_id'];
+        $item = $this->itemsModel->getOne($itemId['value']);
+        $cartQuantity = $this->shoppingCartModel->getCartQuantity($userId);
+
+        $params = [
+            'name' => "Gaming World",
+            'currentPage' => "singleItem",
+            'userId' => $userId,
+            'item' => $item,
+            'cartQuantity' => $cartQuantity->items_quantity
+        ];
+
+        return $this->render('singleItem', $params);
+    }
+
     public function notFound()
     {
         return $this->render('_404');

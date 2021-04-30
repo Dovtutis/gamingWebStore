@@ -32,7 +32,7 @@
             <div class="items-container">
                 <?php foreach ($items as $item) : ?>
                     <div class="items-container-card">
-                        <a href="/<?php echo $item->item_id ?>">
+                        <a href="/item/<?php echo $item->item_id ?>">
                             <img src="<?php echo $item->item_image ?>"></img>
                         </a>
                         <p><?php echo $item->item_name ?></p>
@@ -86,7 +86,7 @@
             const card = document.createElement('div');
             card.classList.add('items-container-card');
             const anchor = document.createElement('a');
-            anchor.setAttribute("href", `${item.item_id}`);
+            anchor.setAttribute("href", `/item/${item.item_id}`);
             anchor.innerHTML = `<img src="${item.item_image}"></img>`;
             const paragraph = document.createElement('p');
             paragraph.innerHTML = item.item_name;

@@ -22,20 +22,26 @@ $config = [
 $app = new Application(dirname(__DIR__), $config);
 
 $app->router->get('/main', [SiteController::class, 'mainPage']);
+
 $app->router->get('/userAccount', [UserController::class, 'userAccount']);
 
 $app->router->get('/adminPanel', [AdminController::class, 'adminInferface']);
 $app->router->post('/adminPanel', [AdminController::class, 'adminInferface']);
+
 $app->router->post('/updateOrder', [AdminController::class, 'updateOrder']);
+
 $app->router->post('/fetchItems', [SiteController::class, 'fetchItemsByType']);
 
 $app->router->get('/register', [AuthController::class, 'register']);
 $app->router->post('/register', [AuthController::class, 'register']);
 
 $app->router->post('/editUser', [AuthController::class, 'edit']);
+
 $app->router->post('/changePassword', [AuthController::class, 'changePassword']);
 
 $app->router->post('/addToCart', [ShoppingCartController::class, 'addToCart']);
+
+$app->router->get('/item', [SiteController::class, 'singleItem']);
 
 $app->router->get('/login', [AuthController::class, 'login']);
 $app->router->post('/login', [AuthController::class, 'login']);
