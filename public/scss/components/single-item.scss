@@ -37,6 +37,14 @@
             font-size: 24px;
             font-weight: 600;
         }
+
+        .single-item-quantity {
+            font-size: 18px;
+
+            span {
+                font-size: inherit;
+            }
+        }
     }
 
     .single-item-right-container {

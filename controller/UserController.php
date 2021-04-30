@@ -10,6 +10,7 @@ use app\core\Validation;
 use app\model\OrdersModel;
 use app\model\ItemsModel;
 use app\model\UserModel;
+use app\model\ShoppingCartModel;
 
 class UserController extends Controller
 {
@@ -18,6 +19,7 @@ class UserController extends Controller
     private OrdersModel $ordersModel;
     private ItemsModel $itemsModel;
     private UserModel $userModel;
+    private ShoppingCartModel $shoppingCartModel;
 
     public function __construct()
     {
@@ -28,6 +30,7 @@ class UserController extends Controller
         $this->ordersModel = new OrdersModel();
         $this->itemsModel = new ItemsModel();
         $this->userModel = new UserModel();
+        $this->shoppingCartModel = new ShoppingCartModel();
     }
 
     /**
@@ -38,6 +41,7 @@ class UserController extends Controller
     {
         $user_id = $_SESSION['user_id'];
         $userOrders = $this->ordersModel->getAllOrdersByUser($user_id);
+        $cartQuantity = $this->shoppingCartModel->getCartQuantity($user_id);
 
         foreach ($userOrders as $order) {
             $orderObj = new \stdClass();
@@ -88,7 +92,8 @@ class UserController extends Controller
             'name' => "Gaming World",
             'currentPage' => "userAccount",
             'userOrders' => $allOrders,
-            'user' => $user
+            'user' => $user,
+            'cartQuantity' => $cartQuantity->items_quantity
         ];
         
         return $this->render('userPage', $params);

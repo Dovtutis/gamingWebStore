@@ -11,7 +11,7 @@
         </div>
         <span><?php echo $item->item_name ?></span>
         <span>€<?php echo $item->item_price ?></span>
-        <span>Left in sale: <span id="item-quantity-counter"><?php echo $item->item_quantity ?></span> </span>
+        <span class="single-item-quantity">Left in sale: <span id="item-quantity-counter"><?php echo $item->item_quantity ?></span> qty.</span>
     </div>
     <div class="single-item-right-container">
         <iframe src="<?php echo $item->item_video ?>">

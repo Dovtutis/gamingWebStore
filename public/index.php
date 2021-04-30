@@ -43,6 +43,8 @@ $app->router->post('/addToCart', [ShoppingCartController::class, 'addToCart']);
 
 $app->router->get('/item', [SiteController::class, 'singleItem']);
 
+$app->router->get('/shoppingCart', [ShoppingCartController::class, 'shoppingCart']);
+
 $app->router->get('/login', [AuthController::class, 'login']);
 $app->router->post('/login', [AuthController::class, 'login']);
 

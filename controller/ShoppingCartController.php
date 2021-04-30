@@ -98,6 +98,29 @@ class ShoppingCartController extends Controller
         echo json_encode($data);
     }
 
+    public function shoppingCart (Request $request) {
+        $userId = $_SESSION['user_id'];
+        $shoppingCart = $this->shoppingCartModel->getAll($userId);
+        $shoppingCartItems = json_decode($shoppingCart[0]->items);
+        $cartQuantity = $this->shoppingCartModel->getCartQuantity($userId);
+
+        for ($x = 0; $x < count($shoppingCartItems); $x++) {
+            $shoppingCartItems[$x]->itemData = $this->itemsModel->getOne($shoppingCartItems[$x]->itemId);
+        }
+
+        $params = [
+            'name' => "Gaming World",
+            'currentPage' => "shoppingCart",
+            'userId' => $userId,
+            'shoppingCartItems' => $shoppingCartItems,
+            'shoppingCartId' => $shoppingCart[0]->shopping_cart_id,
+            'shoppingCartTimestamp' => $shoppingCart[0]->timestamp,
+            'cartQuantity' => $cartQuantity->items_quantity
+        ];
+
+        return $this->render('shoppingCart', $params);
+    }
+
 
     public function notFound()
     {
