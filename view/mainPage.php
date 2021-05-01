@@ -49,6 +49,8 @@
     </article>
 </main>
 
+<?php var_dump($cartQuantity) ?>
+
 <script>
     const itemsContainerEl = document.querySelector('.items-container');
     const navbarConsolesSelectionButton = document.getElementById('navbar-consoles-selection-button');

@@ -62,7 +62,7 @@ class SiteController extends Controller
                 ],
             ],
             'items' => $items,
-            'cartQuantity' => $cartQuantity->items_quantity
+            'cartQuantity' => $cartQuantity->items_quantity ?? 0
         ];
         return $this->render('mainPage', $params);
     }

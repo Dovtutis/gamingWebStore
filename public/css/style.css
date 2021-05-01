@@ -893,6 +893,7 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
   padding: 50px;
   max-width: 1526px;
+  min-height: 600px;
 }
 .shopping-cart-container .shopping-cart-info-box {
   display: flex;
@@ -930,18 +931,23 @@
   width: 100px;
   display: inline-block;
 }
-.shopping-cart-container .table .total-price-box .shopping-cart-delete-icon {
-  font-size: 30px;
+.shopping-cart-container .table .total-price-box .shopping-cart-delete-button {
+  border: none;
+  outline: none;
   cursor: pointer;
   transition: 0.3s;
+  background: transparent;
 }
-.shopping-cart-container .table .total-price-box .shopping-cart-delete-icon:hover {
+.shopping-cart-container .table .total-price-box .shopping-cart-delete-button i {
+  font-size: 30px;
+}
+.shopping-cart-container .table .total-price-box .shopping-cart-delete-button:hover {
   transform: scale(0.96);
 }
 .shopping-cart-container .shopping-cart-confirm-box {
   display: flex;
-  justify-content: flex-end;
-  padding: 0 125px;
+  justify-content: space-between;
+  align-items: center;
 }
 .shopping-cart-container .shopping-cart-confirm-box #buy-button {
   padding: 0.5rem 3rem;

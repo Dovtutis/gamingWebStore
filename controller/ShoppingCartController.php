@@ -24,14 +24,14 @@ class ShoppingCartController extends Controller
     }
 
     public function addToCart(Request $request)
-    {   
+    {
 
         $contentType = isset($_SERVER["CONTENT_TYPE"]) ? trim($_SERVER["CONTENT_TYPE"]) : '';
 
         if ($contentType === "application/json") {
             $content = trim(file_get_contents("php://input"));
             $decoded = json_decode($content, true);
-        } 
+        }
 
         $itemId = $decoded['info']['itemId'];
         $userId = $decoded['info']['userId'];
@@ -59,7 +59,7 @@ class ShoppingCartController extends Controller
 
                 $existingItemTrigger = false;
 
-                for ($i=0; $i < count($shoppingCartItems); $i++) { 
+                for ($i = 0; $i < count($shoppingCartItems); $i++) {
                     if ($shoppingCartItems[$i]->itemId === $itemId) {
                         $shoppingCartItems[$i]->itemQuantity += $itemQuantity;
                         $existingItemTrigger = true;
@@ -84,7 +84,7 @@ class ShoppingCartController extends Controller
 
                 $data['items'] = $shoppingCartItems;
                 $data['items_quantity'] = 1;
-                
+
                 $this->shoppingCartModel->add($data);
                 $this->itemsModel->editItemQuantity($itemId, $itemQuantityFromDatabase);
             }
@@ -98,27 +98,85 @@ class ShoppingCartController extends Controller
         echo json_encode($data);
     }
 
-    public function shoppingCart (Request $request) {
+    public function shoppingCart(Request $request)
+    {
         $userId = $_SESSION['user_id'];
         $shoppingCart = $this->shoppingCartModel->getAll($userId);
-        $shoppingCartItems = json_decode($shoppingCart[0]->items);
-        $cartQuantity = $this->shoppingCartModel->getCartQuantity($userId);
 
-        for ($x = 0; $x < count($shoppingCartItems); $x++) {
-            $shoppingCartItems[$x]->itemData = $this->itemsModel->getOne($shoppingCartItems[$x]->itemId);
+        if ($shoppingCart) {
+            $shoppingCartItems = json_decode($shoppingCart[0]->items);
+            $cartQuantity = $this->shoppingCartModel->getCartQuantity($userId);
+
+            for ($x = 0; $x < count($shoppingCartItems); $x++) {
+                $shoppingCartItems[$x]->itemData = $this->itemsModel->getOne($shoppingCartItems[$x]->itemId);
+            }
+
+            $params = [
+                'name' => "Gaming World",
+                'currentPage' => "shoppingCart",
+                'userId' => $userId,
+                'shoppingCartItems' => $shoppingCartItems,
+                'shoppingCartId' => $shoppingCart[0]->shopping_cart_id,
+                'shoppingCartTimestamp' => $shoppingCart[0]->timestamp,
+                'cartQuantity' => $cartQuantity->items_quantity
+            ];
+        } else {
+            $params = [
+                'name' => "Gaming World",
+                'currentPage' => "shoppingCart",
+                'userId' => $userId,
+                'shoppingCartItems' => false
+            ];
         }
 
-        $params = [
-            'name' => "Gaming World",
-            'currentPage' => "shoppingCart",
-            'userId' => $userId,
-            'shoppingCartItems' => $shoppingCartItems,
-            'shoppingCartId' => $shoppingCart[0]->shopping_cart_id,
-            'shoppingCartTimestamp' => $shoppingCart[0]->timestamp,
-            'cartQuantity' => $cartQuantity->items_quantity
-        ];
-
         return $this->render('shoppingCart', $params);
+    }
+
+    public function deleteFromCart(Request $request)
+    {
+        $contentType = isset($_SERVER["CONTENT_TYPE"]) ? trim($_SERVER["CONTENT_TYPE"]) : '';
+
+        if ($contentType === "application/json") {
+            $content = trim(file_get_contents("php://input"));
+            $decoded = json_decode($content, true);
+        }
+
+        $shoppingCartId = $decoded['info']['shoppingCartId'];
+        $itemId = $decoded['info']['itemId'];
+        $selectedQuantity = $decoded['info']['selectedQuantity'];
+        $userId = $decoded['info']['userId'];
+
+        $shoppingCart = $this->shoppingCartModel->getAll($userId);
+
+        $shoppingCartItems = $shoppingCart[0]->items;
+        $shoppingCartItems = json_decode($shoppingCartItems);
+
+        $filteredShoppingCartItems = [];
+
+        foreach ($shoppingCartItems as $item) {
+            if ($item->itemId != $itemId) {
+                $filteredShoppingCartItems[] = $item;
+            }
+        }
+
+        $data['shopping_cart_id'] = $shoppingCartId;
+        $data['items_quantity'] = count($shoppingCartItems);
+        $data['items'] = json_encode($filteredShoppingCartItems);
+
+        if ($data['items_quantity'] == 1) {
+            $this->shoppingCartModel->delete($shoppingCartId);
+        } else {
+            $data['items_quantity'] = count($filteredShoppingCartItems);
+            $this->shoppingCartModel->edit($data);
+        };
+
+        $quantity = $this->itemsModel->getItemQuantity($itemId)->item_quantity;
+        $quantity = $quantity + $selectedQuantity;
+        $this->itemsModel->editItemQuantity($itemId, $quantity);
+        $data['response'] = true;
+
+        header('Content-Type: application/json');
+        echo json_encode($data);
     }
 
 

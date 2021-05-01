@@ -93,7 +93,7 @@ class UserController extends Controller
             'currentPage' => "userAccount",
             'userOrders' => $allOrders,
             'user' => $user,
-            'cartQuantity' => $cartQuantity->items_quantity
+            'cartQuantity' => $cartQuantity->items_quantity ?? null
         ];
         
         return $this->render('userPage', $params);
