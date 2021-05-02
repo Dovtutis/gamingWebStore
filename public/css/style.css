@@ -886,7 +886,7 @@
   background-color: #3eac2d;
 }
 
-.shopping-cart-container {
+#shopping-cart-container {
   margin: 50px auto;
   display: flex;
   flex-direction: column;
@@ -895,61 +895,65 @@
   max-width: 1526px;
   min-height: 600px;
 }
-.shopping-cart-container .shopping-cart-info-box {
+#shopping-cart-container .shopping-cart-info-box {
   display: flex;
   justify-content: space-between;
 }
-.shopping-cart-container .shopping-cart-info-box #error-box {
+#shopping-cart-container .shopping-cart-info-box #error-box {
   color: #ff6347;
   font-weight: 600;
 }
-.shopping-cart-container .table .shopping-cart-image {
+#shopping-cart-container .table a {
+  text-decoration: none;
+  margin-left: 10px;
+}
+#shopping-cart-container .table .shopping-cart-image {
   width: 50px;
   height: 50px;
 }
-.shopping-cart-container .table .item-quantity-box {
+#shopping-cart-container .table .item-quantity-box {
   margin-top: 5px;
 }
-.shopping-cart-container .table .item-quantity-box .shopping-cart-quantity {
+#shopping-cart-container .table .item-quantity-box .shopping-cart-quantity {
   background-color: #eee;
   padding: 5px;
   width: 30px;
   text-align: center;
   display: inline-block;
 }
-.shopping-cart-container .table .item-quantity-box .quantity-button {
+#shopping-cart-container .table .item-quantity-box .quantity-button {
   border: none;
   outline: none;
   cursor: pointer;
   background: transparent;
   font-size: 20px;
 }
-.shopping-cart-container .table .item-price-box {
+#shopping-cart-container .table .item-price-box {
   margin-top: 5px;
 }
-.shopping-cart-container .table .total-price-box .total-item-price {
+#shopping-cart-container .table .total-price-box .total-item-price {
   width: 100px;
   display: inline-block;
 }
-.shopping-cart-container .table .total-price-box .shopping-cart-delete-button {
+#shopping-cart-container .table .total-price-box .shopping-cart-delete-button {
   border: none;
   outline: none;
   cursor: pointer;
   transition: 0.3s;
   background: transparent;
 }
-.shopping-cart-container .table .total-price-box .shopping-cart-delete-button i {
+#shopping-cart-container .table .total-price-box .shopping-cart-delete-button i {
   font-size: 30px;
 }
-.shopping-cart-container .table .total-price-box .shopping-cart-delete-button:hover {
+#shopping-cart-container .table .total-price-box .shopping-cart-delete-button:hover {
   transform: scale(0.96);
 }
-.shopping-cart-container .shopping-cart-confirm-box {
+#shopping-cart-container .shopping-cart-confirm-box {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-.shopping-cart-container .shopping-cart-confirm-box #buy-button {
+#shopping-cart-container .shopping-cart-confirm-box #buy-button {
   padding: 0.5rem 3rem;
   border: none;
   background-color: #24ba07;
@@ -960,18 +964,131 @@
   margin-right: 170px;
   transition: 0.3s;
 }
-.shopping-cart-container .shopping-cart-confirm-box #buy-button a {
+#shopping-cart-container .shopping-cart-confirm-box #buy-button a {
   text-decoration: none;
   color: #ffffff;
 }
-.shopping-cart-container .shopping-cart-confirm-box #buy-button:hover {
+#shopping-cart-container .shopping-cart-confirm-box #buy-button:hover {
   background-color: #1e9b06;
 }
-.shopping-cart-container #message-box {
+#shopping-cart-container #message-box {
   margin-top: 30px;
   font-size: 20px;
   text-align: center;
   color: tomato;
+}
+
+#checkout-container {
+  margin: 50px auto;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  padding: 50px;
+  max-width: 1526px;
+  min-height: 600px;
+  display: none;
+}
+#checkout-container #price-container {
+  width: 40%;
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: #F7EEE9;
+}
+#checkout-container #price-container #price-container-title {
+  font-size: 50px;
+  font-weight: bold;
+  margin: 10px 0;
+}
+#checkout-container #price-container #price-container-text {
+  font-size: 30px;
+  font-weight: bold;
+  margin: 10px 0;
+  color: #777676;
+}
+#checkout-container #price-container #checkout-image {
+  width: 250px;
+  height: 250px;
+}
+#checkout-container #price-container #price-container-second-text {
+  font-size: 20px;
+  margin-top: 10px;
+  color: #777676;
+}
+#checkout-container #price-container #price-container-total {
+  font-size: 40px;
+  font-weight: bold;
+  margin-bottom: 100px;
+  color: #474747;
+}
+#checkout-container #credit-card-container {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0 3rem;
+}
+#checkout-container #credit-card-container #credit-card-container-text {
+  font-size: 30px;
+  font-weight: bold;
+  margin: 10px 0;
+  color: #777676;
+}
+#checkout-container #credit-card-container #cardName {
+  width: 100%;
+  height: 40px;
+  font-size: 20px;
+  line-height: 40px;
+  padding: 0 2rem;
+}
+#checkout-container #credit-card-container .card-input-paceholder {
+  font-size: 16px;
+  font-weight: 600;
+  color: #777676;
+}
+#checkout-container #credit-card-container #card-expiration-cvc-container {
+  display: flex;
+}
+#checkout-container #credit-card-container .card-form-selector {
+  width: 80px;
+  height: 50px;
+  padding: 0.5rem;
+  border-radius: 5px;
+  border: 1px solid #cecac8;
+}
+#checkout-container #credit-card-container #card-cvc-group {
+  padding-left: 10px;
+}
+#checkout-container #credit-card-container #checkout-submit-button {
+  width: 90%;
+  height: 70px;
+  border-radius: 5px;
+  display: block;
+  margin: 20px auto;
+  color: #fff;
+  font-size: 20px;
+  font-weight: 600;
+  text-align: center;
+  outline: none;
+  cursor: pointer;
+  transition: 0.3s;
+  background-color: #E00025;
+}
+#checkout-container #credit-card-container #checkout-submit-button:hover {
+  transform: scale(0.98);
+}
+#checkout-container #credit-card-container #back-to-shopping-cart-button {
+  margin: 10px auto;
+  display: block;
+  cursor: pointer;
+  padding: 5px 20px;
+  outline: none;
+}
+#checkout-container #credit-card-container #checkout-message {
+  font-size: 26px;
+  font-weight: bold;
+  color: #24ba07;
 }
 
 @font-face {

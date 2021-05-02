@@ -27,9 +27,10 @@ class OrdersModel
      */
     public function addOrder($data)
     {
-        $this->db->query("INSERT INTO orders (`user_id`, `order_list`, `status`) VALUES (:user_id, :order_list, :status)");
+        $this->db->query("INSERT INTO orders (`user_id`, `order_list`, `message`, `status`) VALUES (:user_id, :order_list, :message, :status)");
         $this->db->bind(':user_id', $data['userId']);
         $this->db->bind(':order_list', $data['orderList']);
+        $this->db->bind(':message', $data['message']);
         $this->db->bind(':status', $data['status']);
 
         if ($this->db->execute()){

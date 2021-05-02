@@ -188,4 +188,19 @@ class Validation
             return '';
         }
     }
+
+    public function validateCardName($field)
+    {
+        if (empty($field)) return "Please enter your credit card name";
+        if (!preg_match("/^[a-zA-Z\sĄČĘĖĮŠŲŪŽąčęėįšųūž]*$/", $field)) return "Card name must contain only letters";
+        return '';
+    }
+
+    public function validateCardNumber($field, $length)
+    {
+        if (empty($field)) return "Please enter your credit card number";
+        if (preg_match("/^[a-zA-Z\s]*$/", $field)) return "Card number must contain only digits";
+        if (strlen($field) !== $length) return "Card number length must be 16 digits";
+        return '';
+    }
 }

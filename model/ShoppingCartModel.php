@@ -92,7 +92,6 @@ class ShoppingCartModel
 
     public function getCartQuantity($user_id)
     {
-        // $this->db->query("SELECT count(*) as quantity FROM shopping_cart WHERE user_id = :user_id");
         $this->db->query("SELECT items_quantity FROM shopping_cart WHERE user_id = :user_id");
         $this->db->bind(':user_id', $user_id);
         $row = $this->db->singleRow();

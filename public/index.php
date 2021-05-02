@@ -6,6 +6,7 @@ use app\core\AuthController;
 use app\core\Application;
 use app\controller\UserController;
 use app\controller\AdminController;
+use app\controller\CheckoutController;
 use app\controller\ShoppingCartController;
 
 $dotenv = Dotenv\Dotenv::createImmutable(dirname(__DIR__));
@@ -45,6 +46,8 @@ $app->router->get('/item', [SiteController::class, 'singleItem']);
 
 $app->router->get('/shoppingCart', [ShoppingCartController::class, 'shoppingCart']);
 $app->router->post('/deleteFromCart', [ShoppingCartController::class, 'deleteFromCart']);
+
+$app->router->post('/checkout', [CheckoutController::class, 'checkout']);
 
 $app->router->get('/login', [AuthController::class, 'login']);
 $app->router->post('/login', [AuthController::class, 'login']);
