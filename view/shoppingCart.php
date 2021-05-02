@@ -1,7 +1,6 @@
 <div class="shopping-cart-container">
     <div class="shopping-cart-info-box">
         <h4>Your basket</h4>
-        <div id="error-box"></div>
     </div>
     <table class="table">
         <thead>
@@ -16,7 +15,7 @@
             <?php if ($shoppingCartItems) : ?>
                 <?php foreach ($shoppingCartItems as $item) : ?>
                     <tr>
-                        <td scope="row">
+                        <td scope="row" itemName="<?php echo $item->itemData->item_name ?>">
                             <img src="<?php echo $item->itemData->item_image ?>" alt="<?php echo $item->itemData->item_name ?>" class="shopping-cart-image">
                             <?php echo $item->itemData->item_name ?>
                         </td>
@@ -27,9 +26,9 @@
                         </td>
                         <td>
                             <div class="item-quantity-box">
-                                <button class="quantity-button quantity-minus">-</button>
+                                <button class="quantity-button quantity-minus" itemId="<?php echo $item->itemData->item_id ?>">-</button>
                                 <div class="shopping-cart-quantity"><?php echo $item->itemQuantity ?></div>
-                                <button class="quantity-button quantity-plus">+</button>
+                                <button class="quantity-button quantity-plus" itemId="<?php echo $item->itemData->item_id ?>">+</button>
                             </div>
                         </td>
                         <td class="total-price-box">
@@ -51,20 +50,23 @@
             <button id="buy-button"><a id="buy-button-anchor">Continue</a></button>
         <?php endif; ?>
     </div>
+    <div id="message-box"></div>
 </div>
 
 <script>
     let totalSumEl = document.getElementById('total-sum');
     const shoppingCartCounterEl = document.getElementById('shopping-cart-counter');
+    const userId = <?php echo $userId?>;
+    const messageBoxEl = document.getElementById('message-box');
 
     const minusSelectors = document.querySelectorAll('.quantity-minus');
     minusSelectors.forEach((element) => {
-        element.addEventListener('click', minusQuantity);
+        element.addEventListener('click', () => changeQuantity(event, '-'));
     });
 
     const addSelectors = document.querySelectorAll('.quantity-plus');
     addSelectors.forEach((element) => {
-        element.addEventListener('click', addQuantity);
+        element.addEventListener('click', () => changeQuantity(event, '+'));
     });
 
     const deleteButtons = document.querySelectorAll('.shopping-cart-delete-button');
@@ -86,18 +88,41 @@
         totalSumEl.innerHTML = "Your total sum: € " + totalSum.toFixed(2);
     }
 
-    function minusQuantity(event) {
-        if (event.target.parentNode.children[1].innerText > 1) {
-            event.target.parentNode.children[1].innerText--;
+    function changeQuantity(event, action) {
+        clearMessageBox();
+
+        const info = {
+            itemId: event.target.attributes.itemId.value,
+            itemQuantity: 1,
+            userId: userId,
+            action: action
         }
 
-        recalculatePrices(event);
-    }
-
-    function addQuantity(event) {
-        event.target.parentNode.children[1].innerText++;
-
-        recalculatePrices(event);
+        if (action === "-" && (event.target.parentNode.children[1].innerText - 1) === 0) {
+            null
+        }else {
+            console.log("fetchinam");
+            fetch(`/addToCart`, {
+                method: "POST",
+                mode: "same-origin",
+                credentials: "same-origin",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    info: info
+                })
+            }).then(resp => resp.json())
+            .then(data => {
+                console.log(data)
+                if (data.response === true) {
+                    handleSuccess(event, action);
+                    recalculatePrices(event);
+                } else {
+                    handleOutOfStock(event);
+                }
+            }).catch(error => console.error()); 
+        }
     }
 
     function deleteItem(event) {
@@ -142,10 +167,6 @@
         sumTotal();
     }
 
-    function continueToCheckout() {
-
-    }
-
     function handleDeleteSuccess(event) {
         let row = event.target.parentNode.parentNode.parentNode;
         console.log(row);
@@ -154,4 +175,22 @@
         row.remove();
         sumTotal();
     }
+
+    function handleOutOfStock(event) {
+        const itemName = event.target.parentNode.parentNode.parentNode.children[0].attributes.itemName.value;
+        messageBoxEl.innerText = `We are sorry, but there are no more "${itemName}" in stock!`;
+    }
+
+    function clearMessageBox() {
+        messageBoxEl.innerText = "";
+    }
+
+    function handleSuccess(event, action) {
+        if (action === "+") {
+            event.target.parentNode.children[1].innerText++;
+        } else {
+            event.target.parentNode.children[1].innerText--;
+        }
+    }
+
 </script>

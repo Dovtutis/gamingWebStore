@@ -85,7 +85,7 @@
             font-size: 18px;
             cursor: pointer;
             border-radius: 10px;
-            margin-right: 10px;
+            margin-right: 170px;
             transition: .3s;
         }
 
@@ -98,5 +98,12 @@
              background-color: #1e9b06;
          }
      
+    }
+
+    #message-box {
+        margin-top: 30px;
+        font-size: 20px;
+        text-align: center;
+        color: rgb(255, 99, 71);
     }
 }

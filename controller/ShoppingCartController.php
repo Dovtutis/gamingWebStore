@@ -36,6 +36,7 @@ class ShoppingCartController extends Controller
         $itemId = $decoded['info']['itemId'];
         $userId = $decoded['info']['userId'];
         $itemQuantity = $decoded['info']['itemQuantity'];
+        $action = $decoded['info']['action'] ?? "+";
 
         $quantityBool = $this->itemsModel->checkQuantity($itemId, $itemQuantity);
         $itemQuantityFromDatabase = $this->itemsModel->getItemQuantity($itemId);
@@ -49,7 +50,13 @@ class ShoppingCartController extends Controller
                 'itemId' => $itemId,
                 'itemQuantity' => $itemQuantity
             ];
-            $itemQuantityFromDatabase = $itemQuantityFromDatabase - $itemQuantity;
+
+            if ($action === "+") {
+                $itemQuantityFromDatabase = $itemQuantityFromDatabase - $itemQuantity;
+            }else {
+                $itemQuantityFromDatabase = $itemQuantityFromDatabase + $itemQuantity;
+            }
+
 
             if ($shoppingCart) {
                 $data['shopping_cart_id'] = $shoppingCart[0]->shopping_cart_id;
@@ -60,8 +67,15 @@ class ShoppingCartController extends Controller
                 $existingItemTrigger = false;
 
                 for ($i = 0; $i < count($shoppingCartItems); $i++) {
+
                     if ($shoppingCartItems[$i]->itemId === $itemId) {
-                        $shoppingCartItems[$i]->itemQuantity += $itemQuantity;
+                        
+                        if ($action === "+") {
+                            $shoppingCartItems[$i]->itemQuantity += $itemQuantity;
+                        }else {
+                            $shoppingCartItems[$i]->itemQuantity -= $itemQuantity;
+                        }
+                        
                         $existingItemTrigger = true;
                         break;
                     }

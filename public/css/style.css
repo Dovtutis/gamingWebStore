@@ -957,7 +957,7 @@
   font-size: 18px;
   cursor: pointer;
   border-radius: 10px;
-  margin-right: 10px;
+  margin-right: 170px;
   transition: 0.3s;
 }
 .shopping-cart-container .shopping-cart-confirm-box #buy-button a {
@@ -966,6 +966,12 @@
 }
 .shopping-cart-container .shopping-cart-confirm-box #buy-button:hover {
   background-color: #1e9b06;
+}
+.shopping-cart-container #message-box {
+  margin-top: 30px;
+  font-size: 20px;
+  text-align: center;
+  color: tomato;
 }
 
 @font-face {
