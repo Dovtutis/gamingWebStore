@@ -90,3 +90,8 @@ CREATE TABLE `orders` (
  `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8
+
+1. copy .env_example to .env
+    1. change db name
+    1. change db user
+    1. change gb password
