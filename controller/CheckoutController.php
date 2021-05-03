@@ -52,7 +52,7 @@ class CheckoutController extends Controller
 
             if ($this->validation->ifEmptyArray($data['errors'])) {
                 $data['errors'] = [];
-                $data['status'] = 'accepted';
+                $data['status'] = 'Order accepted';
                 $orderList = $this->shoppingCartModel->getAll($user_id);
                 $orderItems = $orderList[0]->items;
                 $shoppingCartId = $orderList[0]->shopping_cart_id;

@@ -1,8 +1,8 @@
 <?php use \app\core\html\FormField;?>
 
-    <div class="row">
+    <div class="row register-login-container">
         <div class="col-lg-6 mx-auto">
-            <div class="card card-body bd-light mt-5 p-4 container800" id="registration-container">
+            <div class="card card-body bd-light mt-5 p-4" id="registration-container">
                 <h2>Create an account</h2>
                 <p>Please fill in the form to register with us</p>
                 <form action="" method="post" autocomplete="off" id="registration-form">
@@ -60,9 +60,8 @@
             body: formData
         }).then(resp => resp.json())
             .then(data => {
-                console.log(data)
                 if (data === "registrationSuccessful"){
-                    window.location.replace("/");
+                    window.location.replace("/main");
                 }
                 if (data.errors){
                     handleErrors(data.errors);
@@ -89,13 +88,4 @@
         });
     }
 
-    // const currentPage = "<?php echo $currentPage?>";
-    // const navBarActiveEl = document.getElementById('nav-register');
-    // checkCurrentPage();
-
-    // function checkCurrentPage() {
-    //     if (currentPage === "register"){
-    //         navBarActiveEl.classList.add('active');
-    //     }
-    // }
 </script>

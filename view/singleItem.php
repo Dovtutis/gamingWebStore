@@ -47,7 +47,7 @@
                 userId: userId
             }
 
-            fetch(`/addToCart`, {
+            fetch(`/manageCart`, {
                     method: "POST",
                     mode: "same-origin",
                     credentials: "same-origin",

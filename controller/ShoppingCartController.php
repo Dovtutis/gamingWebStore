@@ -23,7 +23,7 @@ class ShoppingCartController extends Controller
         $this->shoppingCartModel = new ShoppingCartModel();
     }
 
-    public function addToCart(Request $request)
+    public function manageCart(Request $request)
     {
 
         $contentType = isset($_SERVER["CONTENT_TYPE"]) ? trim($_SERVER["CONTENT_TYPE"]) : '';

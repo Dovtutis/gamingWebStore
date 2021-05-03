@@ -21,7 +21,6 @@ class SiteController extends Controller
     {
         $this->itemsModel = new ItemsModel();
         $this->shoppingCartModel = new ShoppingCartModel();
-
     }
 
     public function mainPage(Request $request, $searchQuery = null)
@@ -34,9 +33,10 @@ class SiteController extends Controller
             $items = $this->itemsModel->search($searchParam);
         }
 
-        $userId = $_SESSION['user_id'];
+        $userId = $_SESSION['user_id'] ?? null;
+        $userStatus = $_SESSION['status'] ?? null;
 
-        if ($_SESSION['status'] === "customer") {
+        if ($userStatus === "customer") {
             $cartQuantity = $this->shoppingCartModel->getCartQuantity($userId);
         }
 
@@ -79,16 +79,21 @@ class SiteController extends Controller
 
     public function singleItem(Request $request, $itemId)
     {
-        $userId = $_SESSION['user_id'];
+
+        $userId = $_SESSION['user_id'] ?? null;
+        $userStatus = $_SESSION['status'] ?? null;
         $item = $this->itemsModel->getOne($itemId['value']);
-        $cartQuantity = $this->shoppingCartModel->getCartQuantity($userId);
+        
+        if ($userStatus === "customer") {
+            $cartQuantity = $this->shoppingCartModel->getCartQuantity($userId);
+        }
 
         $params = [
             'name' => "Gaming World",
             'currentPage' => "singleItem",
             'userId' => $userId,
             'item' => $item,
-            'cartQuantity' => $cartQuantity->items_quantity
+            'cartQuantity' => $cartQuantity->items_quantity ?? null
         ];
 
         return $this->render('singleItem', $params);

@@ -20,13 +20,13 @@ use \app\core\html\FormField;
             <div id="orders-container">
                 <?php foreach ($userOrders as $order) : ?>
                     <div class="order-row">
-                        <div>
+                        <div class="flex1">
                             <strong>Order id</strong>
                             <p class="order-row-id">
                                 <?php echo $order->orderId ?>
                             </p>
                         </div>
-                        <div>
+                        <div class="flex5">
                             <strong>Ordered items:</strong>
                             <?php foreach ($order->items as $item) : ?>
                                 <p class="order-row-list">
@@ -36,13 +36,13 @@ use \app\core\html\FormField;
                                 </p>
                             <?php endforeach ?>
                         </div>
-                        <div>
+                        <div class="flex3">
                             <strong>Message:</strong>
                             <p class="order-row-message">
                                 <?php echo $order->message ?>
                             </p>
                         </div>
-                        <div class="status-date-box">
+                        <div class="status-date-box flex3">
                             <strong><span>Order status:</span></strong>
                             <div>
                                 <span><?php echo $order->status ?></span>

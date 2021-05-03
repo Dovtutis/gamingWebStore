@@ -2,7 +2,7 @@
 use \app\core\html\FormField;
 ?>
 
-<div class="row">
+<div class="row register-login-container">
     <div class="col-lg-6 mx-auto">
         <div class="card card-body bd-light mt-5 p-4 container800" id="login-container">
             <h2>Login</h2>
@@ -43,7 +43,6 @@ use \app\core\html\FormField;
             body: formData
         }).then(resp => resp.json())
             .then(data => {
-                console.log(data);
                 if (data === "loginSuccessful"){
                     window.location.replace("/main");
                 }

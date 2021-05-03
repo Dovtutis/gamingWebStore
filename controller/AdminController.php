@@ -37,6 +37,7 @@ class AdminController extends Controller
     public function adminInferface(Request $request)
     {   
         $orders = $this->ordersModel->getAllOrders();
+
         for ($i=0; $i < count($orders); $i++) { 
             $orderItems = [];
             $orders[$i]->user = $this->userModel->getUserById($orders[$i]->user_id);
@@ -44,9 +45,9 @@ class AdminController extends Controller
 
             foreach ($orderList as $order) {
                 $itemObj = new \stdClass();
-                $item = $this->itemsModel->getOne($order->item_id);
+                $item = $this->itemsModel->getOne($order->itemId);
                 $itemObj->itemName = $item->item_name;
-                $itemObj->quantity = $order->item_quantity;
+                $itemObj->quantity = $order->itemQuantity;
                 $itemObj->itemId = $item->item_id;
                 $orderItems[] = $itemObj;
             }

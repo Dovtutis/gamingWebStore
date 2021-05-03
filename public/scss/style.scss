@@ -6,6 +6,7 @@
 @import "./components/main-page-items";
 @import "./components/single-item";
 @import "./components/shopping-cart";
+@import "./components/register-login";
 
 @font-face {
   font-family: 'MyWebFont';
@@ -38,12 +39,3 @@
   display: none;
 }
 
-// .general-input {
-//   margin-bottom: 10px;
-// }
-
-
-// @import "large-screen";
-// @import "medium-screen";
-// @import "small-screen";
-// @import "extra-small-screen";

@@ -55,9 +55,9 @@ class UserController extends Controller
 
             foreach ($orderList as $order) {
                 $itemObj = new \stdClass();
-                $item = $this->itemsModel->getOne($order->item_id);
+                $item = $this->itemsModel->getOne($order->itemId);
                 $itemObj->itemName = $item->item_name;
-                $itemObj->quantity = $order->item_quantity;
+                $itemObj->quantity = $order->itemQuantity;
                 $itemObj->itemId = $item->item_id;
                 $orderItems[] = $itemObj;
             }

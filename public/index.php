@@ -40,7 +40,7 @@ $app->router->post('/editUser', [AuthController::class, 'edit']);
 
 $app->router->post('/changePassword', [AuthController::class, 'changePassword']);
 
-$app->router->post('/addToCart', [ShoppingCartController::class, 'addToCart']);
+$app->router->post('/manageCart', [ShoppingCartController::class, 'manageCart']);
 
 $app->router->get('/item', [SiteController::class, 'singleItem']);
 

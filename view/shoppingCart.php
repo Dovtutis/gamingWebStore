@@ -191,8 +191,7 @@
         if (action === "-" && (event.target.parentNode.children[1].innerText - 1) === 0) {
             null
         } else {
-            console.log("fetchinam");
-            fetch(`/addToCart`, {
+            fetch(`/manageCart`, {
                     method: "POST",
                     mode: "same-origin",
                     credentials: "same-origin",
@@ -204,7 +203,6 @@
                     })
                 }).then(resp => resp.json())
                 .then(data => {
-                    console.log(data)
                     if (data.response === true) {
                         handleSuccess(event, action);
                         recalculatePrices(event);
